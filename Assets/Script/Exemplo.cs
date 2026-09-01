@@ -6,6 +6,7 @@ public class Exemplo : MonoBehaviour
     void Start()
     {
         _nome = "Ivo";
+        _nome = "Kamilly";
     }
 
     // Update is called once per frame
