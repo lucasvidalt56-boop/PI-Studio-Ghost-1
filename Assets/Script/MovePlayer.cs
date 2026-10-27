@@ -13,20 +13,21 @@ public class Move : MonoBehaviour
 
     [SerializeField] bool _isface;
 
-    //Adicionados Recentemente
-
     [SerializeField] float _velocidadeCorrida = 8f;
 
     [SerializeField] Animator _animator;
 
+    [SerializeField] float _forcaPulo = 150f;
+
     bool _correndo;
+
+    
+    bool _correndoNoAr;
 
     void Start()
     {
         _rig2d = GetComponent<Rigidbody2D>();
         _rig2d.angularVelocity = 0;
-
-        // Linha nova
         _animator = GetComponent<Animator>();
     }
 
@@ -42,9 +43,11 @@ public class Move : MonoBehaviour
 
     public void SetJump(InputAction.CallbackContext value)
     {
-        if (_checkGround)
+        if (value.performed && _checkGround)
         {
-            _rig2d.AddForceY(150);
+            _correndoNoAr = _correndo;
+            _checkGround = false;
+            _rig2d.AddForceY(_forcaPulo);
         }
     }
 
@@ -60,6 +63,12 @@ public class Move : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            
+            if (_checkGround)
+            {
+                _correndoNoAr = _correndo;
+            }
+
             _checkGround = false;
         }
     }
@@ -75,10 +84,16 @@ public class Move : MonoBehaviour
 
     void Update()
     {
-        // Adicionado recentemente
-        _rig2d.linearVelocityX = _posicao.x * (_correndo ? _velocidadeCorrida : _velocidadeX);
+        
+        if (_checkGround)
+        {
+            _correndoNoAr = _correndo;
+        }
+
+        bool usarCorrida = _checkGround ? _correndo : _correndoNoAr;
+        _rig2d.linearVelocityX = _posicao.x * (usarCorrida ? _velocidadeCorrida : _velocidadeX);
         _animator.SetBool("Andando", _posicao.x != 0);
-        _animator.SetBool("Correndo", _posicao.x != 0 && _correndo);
+        _animator.SetBool("Correndo", _checkGround && _posicao.x != 0 && usarCorrida);
         _animator.SetBool("Pulando", !_checkGround);
 
 
@@ -92,4 +107,3 @@ public class Move : MonoBehaviour
         }
     }
 }
-
