@@ -51,6 +51,5 @@ public class SlotInventario : MonoBehaviour
         if (_quantidade == null) return;
 
         _quantidade.text = quantidade > 1 ? quantidade.ToString() : "";
-        _quantidade.enabled = quantidade > 1;
     }
 }
