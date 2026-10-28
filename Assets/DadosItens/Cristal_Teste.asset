@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5554d69fc00003342ae0e5d3f01337af, type: 3}
-  m_Name: Pocao
+  m_Name: Cristal_Teste
   m_EditorClassIdentifier: 
-  _nome: "Po\xE7\xE3o M\xE1gica"
-  _sprite: {fileID: 8373540531858074317, guid: 51c5686ac1cedad4e941d57aeaf84e36, type: 3}
+  _nome: Cristal_Teste
+  _sprite: {fileID: 2503000072363076530, guid: 8a8da3dc06d2b8b4c9ce06619eb2fb91, type: 3}
   _quantidadeMaxima: 6
