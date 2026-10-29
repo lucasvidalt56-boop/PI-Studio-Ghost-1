@@ -41,12 +41,17 @@ public class BotaoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler,
     public void OnPointerEnter(PointerEventData eventData)
     {
         mouseSobre = true;
+        EventSystem.current.SetSelectedGameObject(gameObject);
         AtualizarVisual();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         mouseSobre = false;
+
+        if (EventSystem.current.currentSelectedGameObject == gameObject)
+            EventSystem.current.SetSelectedGameObject(null);
+
         AtualizarVisual();
     }
 
