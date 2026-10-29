@@ -53,22 +53,26 @@ public class Move : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.CompareTag("Ground") && _rig2d.linearVelocityY <= 0.01f)
         {
             _checkGround = true;
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ground") && _rig2d.linearVelocityY <= 0.01f)
+            _checkGround = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            
             if (_checkGround)
             {
                 _correndoNoAr = _correndo;
             }
-
             _checkGround = false;
         }
     }
