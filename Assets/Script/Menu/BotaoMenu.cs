@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -6,7 +7,7 @@ using TMPro;
 public class BotaoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler,
     IPointerEnterHandler, IPointerExitHandler
 {
-    [Header("Referências")]
+    [Header("ReferÃªncias")]
     [SerializeField] private Image ornamento;
     [SerializeField] private TMP_Text texto;
 
@@ -19,45 +20,52 @@ public class BotaoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler,
     [SerializeField] private Color corSelecionada = new Color32(242, 180, 90, 255);
 
     private bool mouseSobre;
-    private bool selecionadoPorNavegacao;
 
     private void Start()
     {
-        AtualizarVisual();
+        AtualizarVisual(false);
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        selecionadoPorNavegacao = true;
-        AtualizarVisual();
+        AtualizarVisual(true);
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        selecionadoPorNavegacao = false;
-        AtualizarVisual();
+        AtualizarVisual(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (EventSystem.current == null)
+            return;
+
         mouseSobre = true;
         EventSystem.current.SetSelectedGameObject(gameObject);
-        AtualizarVisual();
+        AtualizarVisual(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         mouseSobre = false;
 
+        if (EventSystem.current == null)
+        {
+            AtualizarVisual(false);
+            return;
+        }
+
         if (EventSystem.current.currentSelectedGameObject == gameObject)
             EventSystem.current.SetSelectedGameObject(null);
 
-        AtualizarVisual();
+        AtualizarVisual(false);
     }
 
-    private void AtualizarVisual()
+    private void AtualizarVisual(bool selecionado)
     {
-        bool selecionado = mouseSobre || selecionadoPorNavegacao;
+        if (ornamento == null || texto == null)
+            return;
 
         ornamento.sprite = selecionado ? amarelo : azul;
         texto.color = selecionado ? corSelecionada : corNormal;
