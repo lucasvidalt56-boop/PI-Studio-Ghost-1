@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Cristal_Teste
   m_EditorClassIdentifier: 
   _nome: Cristal_Teste
-  _sprite: {fileID: 2503000072363076530, guid: 8a8da3dc06d2b8b4c9ce06619eb2fb91, type: 3}
+  _sprite: {fileID: -1195436066994850889, guid: b6a711b56cab3be429f06f72e2de7e46, type: 3}
+  _iconeInventario: {fileID: -1195436066994850889, guid: b6a711b56cab3be429f06f72e2de7e46, type: 3}
   _quantidadeMaxima: 6

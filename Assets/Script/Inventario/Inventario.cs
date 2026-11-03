@@ -97,7 +97,7 @@ public class Inventario : MonoBehaviour
 
         _itens[indice] = item;
         _quantidades[indice] = item != null ? Mathf.Clamp(quantidade, 1, item.QuantidadeMaxima) : 0;
-        _slots[indice].SetItem(item != null ? item.Sprite : null, _quantidades[indice]);
+        _slots[indice].SetItem(item != null ? item.IconeInventario : null, _quantidades[indice]);
     }
 
     void Update()
