@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Picareta
   m_EditorClassIdentifier: 
   _nome: Picareta
-  _sprite: {fileID: 0}
+  _sprite: {fileID: -7246799422834650738, guid: eb61596c69028084a976b5b6303fefe8, type: 3}
+  _iconeInventario: {fileID: 7568127089866875190, guid: 9b0ba25deb3664543b4a39a20158ef39, type: 3}
   _quantidadeMaxima: 1
