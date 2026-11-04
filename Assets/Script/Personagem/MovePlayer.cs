@@ -25,6 +25,9 @@ public class Move : MonoBehaviour
 
     [SerializeField] Item _picareta;
 
+    [SerializeField] Item _espada;
+
+    bool _atacando;
     bool _minerando;
     bool _correndo;
     bool _correndoNoAr;
@@ -63,26 +66,44 @@ public class Move : MonoBehaviour
 
     public void SetMinerar(InputAction.CallbackContext value)
     {
-        if (!value.performed || _minerando || !_checkGround) return;
+        if (!value.performed || !_checkGround || _minerando || _atacando) return;
+        if (_inventario == null) return;
 
-        if (_inventario == null || _picareta == null) return;
+        Item item = _inventario.ItemSelecionado;
 
-        if (_inventario.ItemSelecionado != _picareta) return;
+        if (item == null) return;
 
-        _minerando = true;
+        if (item == _espada)
+        {
+            _atacando = true;
+            _animator.SetBool("Atacando", true);
+        }
+        else if (item == _picareta)
+        {
+            _minerando = true;
+            _animator.SetBool("Minerando", true);
+        }
+        else
+        {
+            return;
+        }
 
         _rig2d.linearVelocityX = 0;
-
         _animator.SetBool("Andando", false);
         _animator.SetBool("Correndo", false);
         _animator.SetBool("Pulando", false);
-        _animator.SetBool("Minerando", true);
     }
 
     public void FinalizarMineracao()
     {
         _minerando = false;
         _animator.SetBool("Minerando", false);
+    }
+
+    public void FinalizarAtaque()
+    {
+        _atacando = false;
+        _animator.SetBool("Atacando", false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -123,7 +144,7 @@ public class Move : MonoBehaviour
     void Update()
     {
 
-        if (_minerando)
+        if (_minerando || _atacando)
         {
             _rig2d.linearVelocityX = 0;
             return;
@@ -149,5 +170,7 @@ public class Move : MonoBehaviour
         {
             Flip();
         }
+
     }
+
 }

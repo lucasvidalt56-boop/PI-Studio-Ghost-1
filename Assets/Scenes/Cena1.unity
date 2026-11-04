@@ -873,6 +873,7 @@ MonoBehaviour:
   _picaretaSelecionada: 0
   _inventario: {fileID: 2092190849}
   _picareta: {fileID: 11400000, guid: ee71ed37e4849f947bc35bf8d6cfe68d, type: 2}
+  _espada: {fileID: 11400000, guid: 8e8929d314ccc3942b57485236319205, type: 2}
 --- !u!114 &362311634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1491,7 +1492,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 3.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
