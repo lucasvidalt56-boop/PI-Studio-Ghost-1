@@ -11,9 +11,27 @@ public class SaveAutomatico : MonoBehaviour
 
     [SerializeField, Min(1)] float _intervaloSave = 300f;
 
+    void Awake()
+    {
+        DadosSave dados = SistemaSave.Carregamento;
+
+        if (dados == null || _personagem == null) return;
+
+        _personagem.position = dados.posicao;
+
+        Rigidbody2D rig = _personagem.GetComponent<Rigidbody2D>();
+
+        if (rig != null)
+        {
+            rig.position = new Vector2(dados.posicao.x, dados.posicao.y);
+            rig.linearVelocity = Vector2.zero;
+            rig.angularVelocity = 0;
+        }
+    }
+
     IEnumerator Start()
     {
-        // Aguarda o Start do inventário criar os slots.
+        // O inventário precisa criar os slots antes de carregar os itens.
         yield return null;
 
         if (_personagem == null || _inventario == null)
@@ -30,17 +48,6 @@ public class SaveAutomatico : MonoBehaviour
             {
                 Debug.LogError("Carregamento interrompido. O save não será sobrescrito.");
                 yield break;
-            }
-
-            Rigidbody2D rig = _personagem.GetComponent<Rigidbody2D>();
-
-            _personagem.position = dados.posicao;
-
-            if (rig != null)
-            {
-                rig.position = new Vector2(dados.posicao.x, dados.posicao.y);
-                rig.linearVelocity = Vector2.zero;
-                rig.angularVelocity = 0;
             }
 
             SistemaSave.Carregamento = null;
