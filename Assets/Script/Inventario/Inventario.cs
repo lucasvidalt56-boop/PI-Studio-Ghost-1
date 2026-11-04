@@ -12,6 +12,8 @@ public class Inventario : MonoBehaviour
 
     [SerializeField] Sprite _layoutSelecionado;
 
+    [SerializeField] Item[] _catalogoItens;
+
     int _slotSelecionado;
 
     SlotInventario[] _slots;
@@ -98,6 +100,72 @@ public class Inventario : MonoBehaviour
         _itens[indice] = item;
         _quantidades[indice] = item != null ? Mathf.Clamp(quantidade, 1, item.QuantidadeMaxima) : 0;
         _slots[indice].SetItem(item != null ? item.IconeInventario : null, _quantidades[indice]);
+    }
+
+    public SlotSave[] ObterSave()
+    {
+        if (_itens == null) return null;
+
+        SlotSave[] dados = new SlotSave[_itens.Length];
+
+        for (int i = 0; i < _itens.Length; i++)
+        {
+            if (_itens[i] != null && string.IsNullOrWhiteSpace(_itens[i].Nome))
+            {
+                Debug.LogError("Preencha o nome de todos os itens.");
+                return null;
+            }
+
+            dados[i] = new SlotSave
+            {
+                item = _itens[i] != null ? _itens[i].Nome : "",
+                quantidade = _quantidades[i]
+            };
+        }
+
+        return dados;
+    }
+
+    public bool CarregarSave(SlotSave[] dados, int selecionado)
+    {
+        if (_itens == null || dados == null ||
+            dados.Length != _itens.Length || _catalogoItens == null)
+        {
+            Debug.LogError("Confira a quantidade de slots e o catalogo de itens.");
+            return false;
+        }
+
+        Item[] encontrados = new Item[dados.Length];
+
+        for (int i = 0; i < dados.Length; i++)
+        {
+            if (string.IsNullOrEmpty(dados[i].item)) continue;
+
+            int correspondencias = 0;
+
+            foreach (Item item in _catalogoItens)
+            {
+                if (item == null || item.Nome != dados[i].item) continue;
+
+                encontrados[i] = item;
+                correspondencias++;
+            }
+
+            if (correspondencias != 1 ||
+                dados[i].quantidade > encontrados[i].QuantidadeMaxima)
+            {
+                Debug.LogError("Confira o item do save: " + dados[i].item);
+                return false;
+            }
+        }
+
+        for (int i = 0; i < dados.Length; i++)
+        {
+            SetItem(i, encontrados[i], dados[i].quantidade);
+        }
+
+        SetSelecionado(selecionado);
+        return true;
     }
 
     void Update()

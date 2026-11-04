@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +8,7 @@ public class MenuPrincipal : MonoBehaviour
 {
     [Header("Menu")]
     [SerializeField] private GameObject botaoInicial;
+    [SerializeField] private Button botaoContinuar;
 
     [Header("Transicao")]
     [SerializeField] private Image fadePreto;
@@ -18,21 +18,46 @@ public class MenuPrincipal : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
+
         Color cor = fadePreto.color;
         cor.a = 0f;
         fadePreto.color = cor;
 
-        EventSystem.current.firstSelectedGameObject = botaoInicial;
-        EventSystem.current.SetSelectedGameObject(botaoInicial);
+        botaoContinuar.interactable = SistemaSave.Ler() != null;
+
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.firstSelectedGameObject = botaoInicial;
+            EventSystem.current.SetSelectedGameObject(botaoInicial);
+        }
     }
 
     public void Jogar()
     {
-        if (!iniciandoJogo)
-            StartCoroutine(IniciarJogo());
+        if (iniciandoJogo) return;
+
+        SistemaSave.NovoJogo();
+        StartCoroutine(IniciarJogo("Cena1"));
     }
 
-    private IEnumerator IniciarJogo()
+    public void Continuar()
+    {
+        if (iniciandoJogo) return;
+
+        DadosSave dados = SistemaSave.Ler();
+
+        if (dados == null)
+        {
+            botaoContinuar.interactable = false;
+            return;
+        }
+
+        SistemaSave.PrepararCarregamento(dados);
+        StartCoroutine(IniciarJogo(dados.cena));
+    }
+
+    private IEnumerator IniciarJogo(string cena)
     {
         iniciandoJogo = true;
 
@@ -53,7 +78,8 @@ public class MenuPrincipal : MonoBehaviour
         cor.a = 1f;
         fadePreto.color = cor;
 
-        SceneManager.LoadScene("Cena1");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(cena);
     }
 
     public void Sair()

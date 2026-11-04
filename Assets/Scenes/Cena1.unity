@@ -870,6 +870,9 @@ MonoBehaviour:
   _velocidadeCorrida: 8
   _animator: {fileID: 0}
   _forcaPulo: 250
+  _picaretaSelecionada: 0
+  _inventario: {fileID: 2092190849}
+  _picareta: {fileID: 11400000, guid: ee71ed37e4849f947bc35bf8d6cfe68d, type: 2}
 --- !u!114 &362311634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,6 +946,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a7c1b906-a691-4bb7-b410-fdbd18b3533e
     m_ActionName: 'Player/Run[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 362311633}
+        m_TargetAssemblyTypeName: Move, Assembly-CSharp
+        m_MethodName: SetMinerar
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 76649658-1c1f-42de-8338-03c942e88282
+    m_ActionName: 'Player/Minerar[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1664,6 +1683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 11400000, guid: ee71ed37e4849f947bc35bf8d6cfe68d, type: 2}
+  _idSave: Picareta01
 --- !u!61 &526114743
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3725,6 +3745,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1918785132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1918785134}
+  - component: {fileID: 1918785133}
+  m_Layer: 0
+  m_Name: GerenciadorSave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1918785133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918785132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb6da4738d1a0a049acd386b0d36e691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _personagem: {fileID: 362311632}
+  _inventario: {fileID: 2092190849}
+  _intervaloSave: 10
+--- !u!4 &1918785134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918785132}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.375778, y: -1.9664336, z: 0.07903651}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1997036357
 GameObject:
   m_ObjectHideFlags: 0
@@ -4130,6 +4197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 11400000, guid: 3e61c8c96a2153c4db6019bd4c718b95, type: 2}
+  _idSave: Cristal01
 --- !u!61 &2048831147
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4453,6 +4521,9 @@ MonoBehaviour:
   _slotPrefab: {fileID: 2432534797708114233, guid: 61bd48da3fbf75c4fbc7027fcba660e2, type: 3}
   _layout: {fileID: -1367676476589022120, guid: 103d7bc27bf621f4c91b76601bbf5412, type: 3}
   _layoutSelecionado: {fileID: 4293238664027826256, guid: 6fa7cbb514796ff4dae00fe6ea28dbdd, type: 3}
+  _catalogoItens:
+  - {fileID: 11400000, guid: ee71ed37e4849f947bc35bf8d6cfe68d, type: 2}
+  - {fileID: 11400000, guid: 3e61c8c96a2153c4db6019bd4c718b95, type: 2}
 --- !u!1 &2144081094
 GameObject:
   m_ObjectHideFlags: 0
@@ -4573,3 +4644,4 @@ SceneRoots:
   - {fileID: 2144081098}
   - {fileID: 1693032585}
   - {fileID: 568108351}
+  - {fileID: 1918785134}

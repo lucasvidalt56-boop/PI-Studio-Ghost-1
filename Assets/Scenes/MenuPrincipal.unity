@@ -1540,6 +1540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   botaoInicial: {fileID: 289141365}
+  botaoContinuar: {fileID: 1703509765}
   fadePreto: {fileID: 945080823}
   duracaoFade: 0.7
 --- !u!4 &1443096295
@@ -2208,7 +2209,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1703509766}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1443096294}
+        m_TargetAssemblyTypeName: MenuPrincipal, Assembly-CSharp
+        m_MethodName: Continuar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1703509766
 MonoBehaviour:
   m_ObjectHideFlags: 0
