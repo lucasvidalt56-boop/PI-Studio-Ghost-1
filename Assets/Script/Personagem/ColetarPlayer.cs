@@ -12,6 +12,8 @@ public class ColetarPlayer : MonoBehaviour
 
     [SerializeField] LayerMask _camadaItens;
 
+    [SerializeField] LayerMask _camadaPortas;
+
     List<Collider2D> _resultados = new List<Collider2D>();
 
     void Start()
@@ -30,10 +32,21 @@ public class ColetarPlayer : MonoBehaviour
         bool controle = Gamepad.current != null &&
                         Gamepad.current.buttonWest.wasPressedThisFrame;
 
-        if (teclado || controle)
+        if (!teclado && !controle) return;
+
+        Collider2D entrada = Physics2D.OverlapPoint(transform.position, _camadaPortas);
+
+        if (entrada != null && entrada.TryGetComponent(out PortaCena porta))
         {
-            Coletar();
+            GrupoJogador jogador = GetComponentInParent<GrupoJogador>();
+
+            if (jogador != null)
+                porta.Entrar(jogador);
+
+            return;
         }
+
+        Coletar();
     }
 
     public void Coletar()
