@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a357f7be65b93b94c9d8e2b9b8067471
+guid: 1b589639ed8dcf04c9f4d3e9e3ea1b45
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6960962007561981386
-    second: Esboco_Mapa_Interior_Definitivo 3_0
+      213: -4561106225937232132
+    second: Esboco_Mapa_Interior_do_Jogo_Def_1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Esboco_Mapa_Interior_Definitivo 3_0
+      name: Esboco_Mapa_Interior_do_Jogo_Def_1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 5617
-        height: 1500
+        width: 2664
+        height: 1501
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: acdc8bba01e4a9060800000000000000
-      internalID: 6960962007561981386
+      spriteID: cfe4034ad02b3b0c0800000000000000
+      internalID: -4561106225937232132
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Esboco_Mapa_Interior_Definitivo 3_0: 6960962007561981386
+      Esboco_Mapa_Interior_do_Jogo_Def_1_0: -4561106225937232132
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

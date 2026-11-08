@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1b589639ed8dcf04c9f4d3e9e3ea1b45
+guid: a5bf4e68ecf3e7840a38693c3002a56a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4561106225937232132
-    second: Esboco_Mapa_Interior_do_Jogo_Def_1_0
+      213: 963665878941880444
+    second: Poste_Apagado_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Esboco_Mapa_Interior_do_Jogo_Def_1_0
+      name: Poste_Apagado_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2664
-        height: 1501
+        width: 64
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cfe4034ad02b3b0c0800000000000000
-      internalID: -4561106225937232132
+      spriteID: c70de7cd201af5d00800000000000000
+      internalID: 963665878941880444
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a8a6dec2c460a8e4da9902cd03dcea08
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Esboco_Mapa_Interior_do_Jogo_Def_1_0: -4561106225937232132
+      Poste_Apagado_0: 963665878941880444
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
