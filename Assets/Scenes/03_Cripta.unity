@@ -635,7 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b99d7444eb7244c8c87c89c3ff838b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jogadorPrefab: {fileID: 5295396509452479234, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
+  _jogadorPrefab: {fileID: 4496240033985271962, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
   _cameraDaFase: {fileID: 1784923291}
 --- !u!1 &619394800
 GameObject:

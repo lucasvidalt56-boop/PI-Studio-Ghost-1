@@ -11,6 +11,9 @@ public class SombraDinamica : MonoBehaviour
     [SerializeField] private float altura = 1f;
     [SerializeField] private float distanciaMaxima = 5f;
 
+    [Header("Posição")]
+    [SerializeField] private float deslocamentoVertical = -0.07f;
+
     [Header("Encolhimento")]
     [SerializeField, Range(0f, 1f)]
     private float shrinkFactor = 0.5f;
@@ -114,7 +117,7 @@ public class SombraDinamica : MonoBehaviour
 
         transform.position = new Vector3(
             personagem.position.x + deslocamentoCentro,
-            hit.point.y + 0.02f,
+            hit.point.y + deslocamentoVertical,
             transform.position.z);
 
         transform.localScale = new Vector3(
@@ -157,7 +160,7 @@ public class SombraDinamica : MonoBehaviour
         {
             transform.position = new Vector3(
                 personagem.position.x,
-                hit.point.y + 0.02f,
+                hit.point.y + deslocamentoVertical,
                 transform.position.z);
         }
     }
