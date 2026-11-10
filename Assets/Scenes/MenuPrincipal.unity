@@ -1295,7 +1295,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: JOGAR
+  m_text: NOVO JOGO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a6b244e70e4c34749b75509507a03fca, type: 2}
   m_sharedMaterial: {fileID: -5107157339747414518, guid: a6b244e70e4c34749b75509507a03fca, type: 2}
@@ -1360,7 +1360,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -4.216694, z: 0, w: 0}
+  m_margin: {x: 0, y: -4.216694, z: -24.57835, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

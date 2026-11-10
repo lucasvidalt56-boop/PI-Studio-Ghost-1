@@ -69,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 48
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -122,7 +122,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
+        y: 0
         width: 64
         height: 64
       alignment: 0
@@ -144,7 +144,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 128
+        y: 0
         width: 64
         height: 64
       alignment: 0
@@ -166,7 +166,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 128
+        y: 0
         width: 64
         height: 64
       alignment: 0
@@ -187,8 +187,8 @@ TextureImporter:
       name: Urubu_voando_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
+        x: 192
+        y: 0
         width: 64
         height: 64
       alignment: 0
@@ -209,8 +209,8 @@ TextureImporter:
       name: Urubu_voando_4
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
+        x: 256
+        y: 0
         width: 64
         height: 64
       alignment: 0
@@ -231,8 +231,8 @@ TextureImporter:
       name: Urubu_voando_5
       rect:
         serializedVersion: 2
-        x: 128
-        y: 64
+        x: 320
+        y: 0
         width: 64
         height: 64
       alignment: 0
@@ -253,7 +253,7 @@ TextureImporter:
       name: Urubu_voando_6
       rect:
         serializedVersion: 2
-        x: 0
+        x: 384
         y: 0
         width: 64
         height: 64
@@ -275,7 +275,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8cb961d0459c58f4888d3b6512957130
+    spriteID: 4d7f22abafb536f48bf645f59929a67e
     internalID: 0
     vertices: []
     indices: 

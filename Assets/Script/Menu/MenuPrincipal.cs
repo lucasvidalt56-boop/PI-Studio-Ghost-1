@@ -38,7 +38,8 @@ public class MenuPrincipal : MonoBehaviour
         if (iniciandoJogo) return;
 
         SistemaSave.NovoJogo();
-        StartCoroutine(IniciarJogo("Cena1"));
+        //Carregamento da primeira cena do jogo
+        StartCoroutine(IniciarJogo("01_ExteriorBasilica"));
     }
 
     public void Continuar()
