@@ -1403,7 +1403,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 3.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4803,6 +4803,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrupoJogador
       objectReference: {fileID: 0}
+    - target: {fileID: 3718709931962479075, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3935749223701345880, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -4854,6 +4858,14 @@ PrefabInstance:
     - target: {fileID: 5742880524902828618, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
       propertyPath: m_LocalPosition.y
       value: -3.105642
+      objectReference: {fileID: 0}
+    - target: {fileID: 7416568672002452086, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884159014236907642, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.06800079
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
