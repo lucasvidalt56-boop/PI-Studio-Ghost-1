@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
-public class CobraInimiga : MonoBehaviour
+public class AtaqueInimigo : MonoBehaviour
 {
     [Header("Vida e ataque")]
     [SerializeField, Min(1)] private int _vidaMaxima = 40;
@@ -17,6 +18,7 @@ public class CobraInimiga : MonoBehaviour
     [SerializeField, Min(0.1f)] private float _distanciaPerseguicao = 8f;
     [Tooltip("Opcional: paredes/chao que bloqueiam ataques. Nao inclua Player ou Inimigos.")]
     [SerializeField] private LayerMask _camadaObstaculos;
+    [SerializeField] private LayerMask _camadaLimite;
 
     [Header("Visual")]
     [SerializeField] private SpriteRenderer _sprite;
@@ -29,6 +31,7 @@ public class CobraInimiga : MonoBehaviour
     private float _proximaBusca;
     private float _proximoAtaque;
     private bool _morta;
+    private readonly Dictionary<Collider2D, float> _limites = new Dictionary<Collider2D, float>();
 
     public int VidaAtual => _vidaAtual;
 
@@ -97,7 +100,59 @@ public class CobraInimiga : MonoBehaviour
         }
 
         float direcao = Mathf.Abs(diferenca.x) > 0.05f ? Mathf.Sign(diferenca.x) : 0f;
+        if (TemLimite(direcao))
+        {
+            Parar();
+            return;
+        }
+
         _rig.linearVelocity = new Vector2(direcao * _velocidade, _rig.linearVelocity.y);
+    }
+
+    private void OnTriggerEnter2D(Collider2D outro)
+    {
+        RegistrarLimite(outro);
+    }
+
+    private void OnTriggerStay2D(Collider2D outro)
+    {
+        RegistrarLimite(outro);
+    }
+
+    private void RegistrarLimite(Collider2D outro)
+    {
+        if (!isActiveAndEnabled || _morta || !outro.isTrigger ||
+            (_camadaLimite.value & (1 << outro.gameObject.layer)) == 0 ||
+            _limites.ContainsKey(outro)) return;
+
+        // Guarda o lado de entrada para permitir recuar, sem atravessar o limite.
+        float lado = Mathf.Abs(_rig.linearVelocity.x) > 0.01f
+            ? _rig.linearVelocity.x : outro.bounds.center.x - _corpo.bounds.center.x;
+        float direcao = Mathf.Abs(lado) > 0.01f ? Mathf.Sign(lado) : 0f;
+        _limites.Add(outro, direcao);
+        if (direcao == 0f || _rig.linearVelocity.x * direcao > 0f) Parar();
+    }
+
+    private bool TemLimite(float direcao)
+    {
+        foreach (var limite in _limites)
+        {
+            Collider2D trigger = limite.Key;
+            if (trigger == null || !trigger.enabled || !trigger.gameObject.activeInHierarchy ||
+                !trigger.isTrigger || (_camadaLimite.value & (1 << trigger.gameObject.layer)) == 0) continue;
+            if (limite.Value == 0f || direcao * limite.Value > 0f) return true;
+        }
+        return false;
+    }
+
+    private void OnTriggerExit2D(Collider2D outro)
+    {
+        _limites.Remove(outro);
+    }
+
+    private void OnDisable()
+    {
+        _limites.Clear();
     }
 
     public void ReceberDano(int quantidade)

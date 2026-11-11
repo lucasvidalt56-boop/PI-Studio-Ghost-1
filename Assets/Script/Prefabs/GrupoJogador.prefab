@@ -565,7 +565,7 @@ GameObject:
   - component: {fileID: 7546597986723687126}
   - component: {fileID: 2764331497949297887}
   - component: {fileID: 6796704863961481537}
-  - component: {fileID: 8664778246115514412}
+  - component: {fileID: 2154156767544579968}
   m_Layer: 0
   m_Name: Personagem
   m_TagString: Player
@@ -883,7 +883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _barraVida: {fileID: 3394881560377174066}
   _textoVida: {fileID: 5196394349270400812}
---- !u!114 &8664778246115514412
+--- !u!114 &2154156767544579968
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -896,16 +896,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _danoEspada: 20
-  _danoPicareta: 10
+  _danoPicareta: 20
   _centroAtaque: {x: 0.8, y: 0}
   _tamanhoAtaque: {x: 1.2, y: 1.2}
   _camadaInimigos:
     serializedVersion: 2
     m_Bits: 256
+  _camadaMinerios:
+    serializedVersion: 2
+    m_Bits: 512
   _camadaObstaculos:
     serializedVersion: 2
-    m_Bits: 64
-  _sprite: {fileID: 8583274730666358959}
+    m_Bits: 0
+  _sprite: {fileID: 0}
   _spriteOriginalOlhaDireita: 1
   _aoMorrer:
     m_PersistentCalls:

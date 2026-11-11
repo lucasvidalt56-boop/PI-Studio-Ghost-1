@@ -1449,7 +1449,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.78125, y: 0.78125}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.78125, y: 0.78125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1576,7 +1576,7 @@ GameObject:
   - component: {fileID: 1132764790}
   - component: {fileID: 1132764793}
   - component: {fileID: 1132764795}
-  - component: {fileID: 1132764794}
+  - component: {fileID: 1132764796}
   m_Layer: 8
   m_Name: Cobra_Coral
   m_TagString: Untagged
@@ -1722,30 +1722,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1380253, y: 1.0227842}
   m_EdgeRadius: 0
---- !u!114 &1132764794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1132764789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0371a057b78684e49b5480b161634e22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _vidaMaxima: 50
-  _dano: 8
-  _intervaloAtaques: 1
-  _alcanceAtaque: 0.15
-  _vidaAtual: 0
-  _velocidade: 2.5
-  _distanciaPerseguicao: 8
-  _camadaObstaculos:
-    serializedVersion: 2
-    m_Bits: 0
-  _sprite: {fileID: 0}
-  _spriteOriginalOlhaDireita: 1
 --- !u!50 &1132764795
 Rigidbody2D:
   serializedVersion: 5
@@ -1773,6 +1749,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1132764796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132764789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d9ce79c776d3f4a8a69d36c5c951cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vidaMaxima: 50
+  _dano: 10
+  _intervaloAtaques: 1
+  _alcanceAtaque: 0.15
+  _vidaAtual: 0
+  _velocidade: 2.5
+  _distanciaPerseguicao: 8
+  _camadaObstaculos:
+    serializedVersion: 2
+    m_Bits: 0
+  _camadaLimite:
+    serializedVersion: 2
+    m_Bits: 1024
+  _sprite: {fileID: 0}
+  _spriteOriginalOlhaDireita: 0
 --- !u!4 &1142998361 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7612565185632346756, guid: abebe219c6bf9b04c8a59858b935c069, type: 3}
@@ -2195,8 +2198,8 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.039583337
-    y: -0.025
+    x: 0.025000002
+    y: -0.010185185
     width: 0.33333334
     height: 0.3333333
   near clip plane: 0.3

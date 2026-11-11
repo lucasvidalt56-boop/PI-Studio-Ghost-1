@@ -15,6 +15,7 @@ public class CombatePlayer : MonoBehaviour
     [SerializeField] Vector2 _centroAtaque = new Vector2(0.8f, 0f);
     [SerializeField] Vector2 _tamanhoAtaque = new Vector2(1.2f, 1.2f);
     [SerializeField] LayerMask _camadaInimigos;
+    [SerializeField] LayerMask _camadaMinerios;
     [SerializeField] LayerMask _camadaObstaculos;
     [SerializeField] SpriteRenderer _sprite;
     [SerializeField] bool _spriteOriginalOlhaDireita = true;
@@ -27,7 +28,8 @@ public class CombatePlayer : MonoBehaviour
     bool _morto;
     bool _golpeDisponivel;
     readonly List<Collider2D> _resultados = new List<Collider2D>();
-    readonly HashSet<CobraInimiga> _atingidas = new HashSet<CobraInimiga>();
+    readonly HashSet<AtaqueInimigo> _atingidas = new HashSet<AtaqueInimigo>();
+    readonly HashSet<Minerio> _mineriosAtingidos = new HashSet<Minerio>();
 
     public bool EstaMorto => _morto || (_vida != null && _vida.VidaAtual <= 0);
 
@@ -36,7 +38,6 @@ public class CombatePlayer : MonoBehaviour
         _vida = GetComponent<VidaPlayer>();
         _rig2d = GetComponent<Rigidbody2D>();
         if (_sprite == null) _sprite = GetComponent<SpriteRenderer>();
-
     }
 
     void LateUpdate()
@@ -65,35 +66,43 @@ public class CombatePlayer : MonoBehaviour
     // Eventos no quadro de impacto.
     public void AcertarEspada()
     {
-        AcertarGolpe(_danoEspada);
+        AcertarGolpe(_danoEspada, false);
     }
 
     public void AcertarPicareta()
     {
-        AcertarGolpe(_danoPicareta);
+        AcertarGolpe(_danoPicareta, true);
     }
 
-    void AcertarGolpe(int dano)
+    void AcertarGolpe(int dano, bool minerar)
     {
         if (EstaMorto || !_golpeDisponivel) return;
         _golpeDisponivel = false;
 
         ContactFilter2D filtro = new ContactFilter2D();
-        filtro.SetLayerMask(_camadaInimigos);
+        filtro.SetLayerMask(_camadaInimigos.value | (minerar ? _camadaMinerios.value : 0));
         filtro.useTriggers = false;
         _atingidas.Clear();
+        _mineriosAtingidos.Clear();
 
         Physics2D.OverlapBox(CentroAtaque(), TamanhoAtaque(),
             transform.eulerAngles.z, filtro, _resultados);
 
         foreach (Collider2D resultado in _resultados)
         {
-            CobraInimiga cobra = resultado.GetComponentInParent<CobraInimiga>();
-            if (cobra == null || !cobra.isActiveAndEnabled || !_atingidas.Add(cobra)) continue;
             if (Physics2D.Linecast(transform.position, resultado.bounds.center,
                 _camadaObstaculos).collider != null) continue;
 
-            cobra.ReceberDano(dano);
+            if (minerar)
+            {
+                Minerio minerio = resultado.GetComponentInParent<Minerio>();
+                if (minerio != null && minerio.isActiveAndEnabled && _mineriosAtingidos.Add(minerio))
+                    minerio.ReceberGolpe();
+            }
+
+            AtaqueInimigo inimigo = resultado.GetComponentInParent<AtaqueInimigo>();
+            if (inimigo != null && inimigo.isActiveAndEnabled && _atingidas.Add(inimigo))
+                inimigo.ReceberDano(dano);
         }
     }
 
