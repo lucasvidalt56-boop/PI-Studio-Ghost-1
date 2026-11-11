@@ -565,6 +565,7 @@ GameObject:
   - component: {fileID: 7546597986723687126}
   - component: {fileID: 2764331497949297887}
   - component: {fileID: 6796704863961481537}
+  - component: {fileID: 8664778246115514412}
   m_Layer: 0
   m_Name: Personagem
   m_TagString: Player
@@ -882,6 +883,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _barraVida: {fileID: 3394881560377174066}
   _textoVida: {fileID: 5196394349270400812}
+--- !u!114 &8664778246115514412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2425682964859383960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c74709f84d5289b4cb9b7778c4cef44e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _danoEspada: 20
+  _danoPicareta: 10
+  _centroAtaque: {x: 0.8, y: 0}
+  _tamanhoAtaque: {x: 1.2, y: 1.2}
+  _camadaInimigos:
+    serializedVersion: 2
+    m_Bits: 256
+  _camadaObstaculos:
+    serializedVersion: 2
+    m_Bits: 64
+  _sprite: {fileID: 8583274730666358959}
+  _spriteOriginalOlhaDireita: 1
+  _aoMorrer:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2483577560046598628
 GameObject:
   m_ObjectHideFlags: 0

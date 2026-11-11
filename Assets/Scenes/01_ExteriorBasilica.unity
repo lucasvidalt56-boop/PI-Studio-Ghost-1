@@ -1395,10 +1395,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.039583337
+    y: -0.025
+    width: 0.33333334
+    height: 0.3333333
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -4862,6 +4862,22 @@ PrefabInstance:
     - target: {fileID: 7416568672002452086, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8664778246115514412, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
+      propertyPath: _centroAtaque.x
+      value: 0.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 8664778246115514412, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
+      propertyPath: _centroAtaque.y
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 8664778246115514412, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
+      propertyPath: _tamanhoAtaque.x
+      value: 1.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 8664778246115514412, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
+      propertyPath: _tamanhoAtaque.y
+      value: 1.92
       objectReference: {fileID: 0}
     - target: {fileID: 8884159014236907642, guid: 23d83dfe877eb5d4e839f662d91cbb61, type: 3}
       propertyPath: m_AnchoredPosition.x
