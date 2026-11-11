@@ -364,7 +364,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d51531cf03d575a4dba7e7a419198a63, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -531,7 +531,7 @@ MonoBehaviour:
   _isface: 0
   _velocidadeCorrida: 8
   _animator: {fileID: 0}
-  _forcaPulo: 250
+  _forcaPulo: 300
   _picaretaSelecionada: 0
   _inventario: {fileID: 927379577365117841}
   _picareta: {fileID: 11400000, guid: ee71ed37e4849f947bc35bf8d6cfe68d, type: 2}
@@ -933,7 +933,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.07977688, y: 0.11681685}
+  m_Offset: {x: 0.07977688, y: 0.21389413}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -943,5 +943,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.97582555, y: 0.030367434}
+  m_Size: {x: 0.97582555, y: 0.018946648}
   m_EdgeRadius: 0

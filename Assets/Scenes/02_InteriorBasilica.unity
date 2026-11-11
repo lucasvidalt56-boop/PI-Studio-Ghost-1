@@ -253,7 +253,7 @@ Transform:
   m_GameObject: {fileID: 468076028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.64, y: -2.074, z: 0}
+  m_LocalPosition: {x: 6.92, y: -2.074, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -910,11 +910,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6016783415109830700, guid: abebe219c6bf9b04c8a59858b935c069, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 78.18
+      value: 15.77
       objectReference: {fileID: 0}
     - target: {fileID: 6016783415109830700, guid: abebe219c6bf9b04c8a59858b935c069, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.58
+      value: -1.16
       objectReference: {fileID: 0}
     - target: {fileID: 6016783415109830700, guid: abebe219c6bf9b04c8a59858b935c069, type: 3}
       propertyPath: m_LocalPosition.z
@@ -950,7 +950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7423577578077677506, guid: abebe219c6bf9b04c8a59858b935c069, type: 3}
       propertyPath: m_Name
-      value: AvisoInteracao (1)
+      value: AvisoInteracao (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1174,7 +1174,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.324997, y: -0.23731303}
+  m_Offset: {x: 1.324997, y: -0.3982349}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1184,7 +1184,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.1753693, y: 4.2960153}
+  m_Size: {x: 3.1753693, y: 4.617859}
   m_EdgeRadius: 0
 --- !u!4 &980925501
 Transform:
@@ -1519,7 +1519,7 @@ Transform:
   m_GameObject: {fileID: 1132764789}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.05, y: -2.502, z: 0}
+  m_LocalPosition: {x: 30.45, y: -2.502, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2105,6 +2105,7 @@ GameObject:
   - component: {fileID: 1494063557}
   - component: {fileID: 1494063556}
   - component: {fileID: 1494063559}
+  - component: {fileID: 1494063560}
   m_Layer: 0
   m_Name: Bau
   m_TagString: Untagged
@@ -2128,7 +2129,7 @@ MonoBehaviour:
   botaoX: {fileID: 1142998361}
   teclaE: {fileID: 1151279424}
   texto: {fileID: 1805588255}
-  mensagem: Abrir
+  mensagem: ABRIR
   velocidadePulso: 2
   intensidadePulso: 0.04
 --- !u!212 &1494063557
@@ -2174,7 +2175,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -3167277614115111231, guid: d3fd1fc258161344b88def84d89f501c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2195,7 +2196,7 @@ Transform:
   m_GameObject: {fileID: 1494063555}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.74, y: -2.033, z: 0}
+  m_LocalPosition: {x: 15.71, y: -2.187, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2235,18 +2236,40 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.04409504, y: 0.11023724}
+  m_Offset: {x: 0.04409504, y: -0.27012753}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 1.3333334, y: 1.3333334}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.0293941, y: 1.4855597}
+  m_Size: {x: 2.0293941, y: 2.2462893}
   m_EdgeRadius: 0
+--- !u!95 &1494063560
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494063555}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a209bf6e816c5bf4da59ee19aa81f483, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1577276258
 GameObject:
   m_ObjectHideFlags: 0
