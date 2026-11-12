@@ -27,6 +27,11 @@ public class Move : MonoBehaviour
 
     [SerializeField] Item _espada;
 
+    [SerializeField] PocaoPuloDuplo _pocaoPuloDuplo;
+
+    [SerializeField, Min(0.1f)] float _intensidadePuloDuplo = 1f;
+
+    bool _usouPuloDuplo;
     bool _atacando;
     bool _minerando;
     bool _correndo;
@@ -51,12 +56,30 @@ public class Move : MonoBehaviour
 
     public void SetJump(InputAction.CallbackContext value)
     {
-        if (value.performed && _checkGround && !_minerando)
+        if (!isActiveAndEnabled || Time.timeScale == 0f) return;
+        if (!value.performed || _minerando || _atacando) return;
+
+        float forca = _forcaPulo;
+
+        if (_checkGround)
         {
             _correndoNoAr = _correndo;
-            _checkGround = false;
-            _rig2d.AddForceY(_forcaPulo);
+            _usouPuloDuplo = false;
         }
+        else
+        {
+            if (_pocaoPuloDuplo == null ||
+                !_pocaoPuloDuplo.Ativa ||
+                _usouPuloDuplo) return;
+
+            _usouPuloDuplo = true;
+            _rig2d.linearVelocityY = 0f;
+
+            forca *= _intensidadePuloDuplo;
+        }
+
+        _checkGround = false;
+        _rig2d.AddForceY(forca);
     }
 
     public void SelecionarPicareta(bool selecionada)
@@ -66,6 +89,14 @@ public class Move : MonoBehaviour
 
     public void SetMinerar(InputAction.CallbackContext value)
     {
+        if (!isActiveAndEnabled || Time.timeScale == 0f) return;
+
+        if (!value.performed || !_checkGround ||
+            _minerando || _atacando) return;
+
+        if (_pocaoPuloDuplo != null &&
+            _pocaoPuloDuplo.Consumir()) return;
+
         if (!value.performed || !_checkGround || _minerando || _atacando) return;
         if (_inventario == null) return;
 
@@ -111,13 +142,16 @@ public class Move : MonoBehaviour
         if (collision.CompareTag("Ground") && _rig2d.linearVelocityY <= 0.01f)
         {
             _checkGround = true;
+            _usouPuloDuplo = false;
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Ground") && _rig2d.linearVelocityY <= 0.01f)
-            _checkGround = true;
+
+        _checkGround = true;
+        _usouPuloDuplo = false;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -561,11 +561,12 @@ GameObject:
   - component: {fileID: 6034595383758419078}
   - component: {fileID: 9003672212251825693}
   - component: {fileID: 5134781115632722322}
-  - component: {fileID: 5474422437421341423}
   - component: {fileID: 7546597986723687126}
+  - component: {fileID: 5474422437421341423}
   - component: {fileID: 2764331497949297887}
   - component: {fileID: 6796704863961481537}
   - component: {fileID: 2154156767544579968}
+  - component: {fileID: 5729478989553502427}
   m_Layer: 0
   m_Name: Personagem
   m_TagString: Player
@@ -802,6 +803,28 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &7546597986723687126
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2425682964859383960}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c5df5b4cd1f88814887e0899a677e45d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5474422437421341423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,28 +849,8 @@ MonoBehaviour:
   _inventario: {fileID: 927379577365117841}
   _picareta: {fileID: 11400000, guid: ee71ed37e4849f947bc35bf8d6cfe68d, type: 2}
   _espada: {fileID: 11400000, guid: 8e8929d314ccc3942b57485236319205, type: 2}
---- !u!95 &7546597986723687126
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2425682964859383960}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c5df5b4cd1f88814887e0899a677e45d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  _pocaoPuloDuplo: {fileID: 5729478989553502427}
+  _intensidadePuloDuplo: 1
 --- !u!114 &2764331497949297887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,6 +916,21 @@ MonoBehaviour:
   _aoMorrer:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5729478989553502427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2425682964859383960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63fa190ea34fa4e41a91fd5e44e7dda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventario: {fileID: 927379577365117841}
+  _pocao: {fileID: 11400000, guid: d1284e7a15858d04fbee63d233d4fc54, type: 2}
+  _duracao: 20
 --- !u!1 &2483577560046598628
 GameObject:
   m_ObjectHideFlags: 0
