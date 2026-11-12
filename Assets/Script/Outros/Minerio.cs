@@ -5,7 +5,7 @@ using UnityEngine;
 public class Minerio : MonoBehaviour
 {
     [SerializeField, Min(1)] int _golpesParaQuebrar = 3;
-    [SerializeField] GameObject _MinerioPrefab;
+    [SerializeField] GameObject _pedraPrefab;
     [SerializeField] Transform _pontoDrop;
 
     int _golpesRestantes;
@@ -14,10 +14,6 @@ public class Minerio : MonoBehaviour
     void Awake()
     {
         _golpesRestantes = Mathf.Max(1, _golpesParaQuebrar);
-
-        if (_MinerioPrefab != null) return;
-        Debug.LogError("Preencha MinerioPrefab com o prefab do Minerio coletavel.", this);
-        enabled = false;
     }
 
     public void ReceberGolpe()
@@ -29,7 +25,10 @@ public class Minerio : MonoBehaviour
         _quebrado = true;
         Vector3 posicao = _pontoDrop != null ? _pontoDrop.position : transform.position;
         gameObject.SetActive(false);
-        Instantiate(_MinerioPrefab, posicao, Quaternion.identity);
+        if (_pedraPrefab != null)
+        {
+            Instantiate(_pedraPrefab, posicao, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 }

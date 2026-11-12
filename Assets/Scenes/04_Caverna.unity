@@ -305,8 +305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9e8823a115c0c44b1a8c10c587ca4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _golpesParaQuebrar: 5
-  _MinerioPrefab: {fileID: 386114075429962966, guid: 87e6988f1f3ab574182c172f92b85a8b, type: 3}
+  _golpesParaQuebrar: 6
+  _pedraPrefab: {fileID: 0}
   _pontoDrop: {fileID: 0}
 --- !u!61 &196004471
 BoxCollider2D:
@@ -2176,7 +2176,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 3.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
