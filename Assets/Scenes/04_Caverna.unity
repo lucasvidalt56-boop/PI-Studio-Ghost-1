@@ -526,7 +526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed33050da49e29544bb9569d339a29b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dano: 2
+  _dano: 100
   _intervaloDano: 1
 --- !u!1 &130804452
 GameObject:
@@ -3100,10 +3100,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.0375
-    y: -0.010185185
-    width: 0.33333334
-    height: 0.3333333
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34

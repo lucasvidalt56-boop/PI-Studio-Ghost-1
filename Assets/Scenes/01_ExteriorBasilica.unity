@@ -2901,6 +2901,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Picareta
       objectReference: {fileID: 0}
+    - target: {fileID: 2516268266030081518, guid: 34aca7622c0412e4fa4ae2578a02f89f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7272869297843657256, guid: 34aca7622c0412e4fa4ae2578a02f89f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.842
