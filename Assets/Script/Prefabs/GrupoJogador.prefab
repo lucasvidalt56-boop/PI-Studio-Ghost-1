@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inventario: {fileID: 927379577365117841}
   _pocao: {fileID: 11400000, guid: d1284e7a15858d04fbee63d233d4fc54, type: 2}
-  _duracao: 20
+  _duracao: 30
 --- !u!1 &2483577560046598628
 GameObject:
   m_ObjectHideFlags: 0
