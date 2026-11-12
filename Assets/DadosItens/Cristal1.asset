@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5554d69fc00003342ae0e5d3f01337af, type: 3}
-  m_Name: Cristal_Teste
+  m_Name: Cristal1
   m_EditorClassIdentifier: 
-  _nome: Cristal_Teste
+  _nome: Cristal1
   _sprite: {fileID: -1195436066994850889, guid: b6a711b56cab3be429f06f72e2de7e46, type: 3}
   _iconeInventario: {fileID: -1195436066994850889, guid: b6a711b56cab3be429f06f72e2de7e46, type: 3}
-  _quantidadeMaxima: 6
+  _quantidadeMaxima: 5
