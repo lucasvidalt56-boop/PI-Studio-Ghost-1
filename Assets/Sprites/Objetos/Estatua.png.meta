@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: a026e39c3b9b6ae4f89742826581b863
+guid: 00b8d65732e2055498d6deb20935e4e6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8305510476272537965
-    second: Pedra_0
+      213: -4585306212177670430
+    second: Estatua_de_Nossa_senhora_de_marmore_0
+  - first:
+      213: 1735116230084623000
+    second: Estatua_de_Nossa_senhora_de_marmore_1
+  - first:
+      213: 5047252999799544283
+    second: Estatua_de_Nossa_senhora_de_marmore_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pedra_0
+      name: Estatua_de_Nossa_senhora_de_marmore_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 94
+        height: 94
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d61928016c9134370800000000000000
-      internalID: 8305510476272537965
+      spriteID: 2ee02c44b48bd50c0800000000000000
+      internalID: -4585306212177670430
       vertices: []
       indices: 
       edges: []
@@ -125,7 +131,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ba0e8c140d75bc340b723257b41b4303
+    spriteID: af64f0fd322a76842956be1c6527ea50
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +141,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Pedra_0: 8305510476272537965
+      Estatua_de_Nossa_senhora_de_marmore_0: -4585306212177670430
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

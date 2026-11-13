@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5554d69fc00003342ae0e5d3f01337af, type: 3}
   m_Name: PerfumeCaminho
   m_EditorClassIdentifier: 
-  _nome: 
+  _nome: PerfumeCaminho
   _sprite: {fileID: 1962788641, guid: 36c6fe9ba0e55d046b6b59ee088f4ef5, type: 3}
   _iconeInventario: {fileID: 1962788641, guid: 36c6fe9ba0e55d046b6b59ee088f4ef5, type: 3}
   _quantidadeMaxima: 5

@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 8273288988191833754}
   - component: {fileID: 3129751630388798974}
   - component: {fileID: 2146667951252815100}
+  - component: {fileID: 4790261743903635690}
   m_Layer: 3
   m_Name: Picareta
   m_TagString: Untagged
@@ -298,6 +299,20 @@ MonoBehaviour:
   mensagem: PEGAR
   velocidadePulso: 2
   intensidadePulso: 0.04
+--- !u!114 &4790261743903635690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662315932619117269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fccec79894d35944286e148f8f905aac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _altura: 0.1
+  _duracaoCiclo: 3
 --- !u!1 &2888810492488234220
 GameObject:
   m_ObjectHideFlags: 0
