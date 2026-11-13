@@ -20,6 +20,15 @@ public class AtaqueInimigo : MonoBehaviour
     [SerializeField] private LayerMask _camadaObstaculos;
     [SerializeField] private LayerMask _camadaLimite;
 
+    [Header("Patrulha opcional")]
+    [Tooltip("Ative apenas nos inimigos que devem andar quando nao estiverem perseguindo.")]
+    [SerializeField] private bool _ativarPatrulha = false;
+    [Tooltip("Distancia para CADA lado da posicao inicial. 2 significa uma faixa total de 4 unidades.")]
+    [SerializeField, Min(0.1f)] private float _raioPatrulha = 2f;
+    [SerializeField, Min(0f)] private float _velocidadePatrulha = 1f;
+    [Tooltip("Tempo parado antes de voltar na outra direcao.")]
+    [SerializeField, Min(0f)] private float _pausaPatrulha = 1f;
+
     [Header("Visual")]
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private bool _spriteOriginalOlhaDireita = true;
@@ -31,6 +40,10 @@ public class AtaqueInimigo : MonoBehaviour
     private float _proximaBusca;
     private float _proximoAtaque;
     private bool _morta;
+    private Vector3 _origemPatrulha;
+    private bool _patrulhando;
+    private float _direcaoPatrulha = 1f;
+    private float _retomarPatrulha;
     private readonly Dictionary<Collider2D, float> _limites = new Dictionary<Collider2D, float>();
 
     public int VidaAtual => _vidaAtual;
@@ -42,6 +55,7 @@ public class AtaqueInimigo : MonoBehaviour
         if (_sprite == null) _sprite = GetComponent<SpriteRenderer>();
         _rig.freezeRotation = true;
         _vidaAtual = Mathf.Max(1, _vidaMaxima);
+        _origemPatrulha = transform.position;
     }
 
     private void FixedUpdate()
@@ -65,23 +79,20 @@ public class AtaqueInimigo : MonoBehaviour
         if (_alvo == null || !_alvo.isActiveAndEnabled || _alvo.EstaMorto ||
             _corpoAlvo == null || !_corpoAlvo.enabled)
         {
-            Parar();
+            PatrulharOuParar();
             return;
         }
 
         Vector2 diferenca = (Vector2)_corpoAlvo.bounds.center - (Vector2)_corpo.bounds.center;
         if (diferenca.sqrMagnitude > _distanciaPerseguicao * _distanciaPerseguicao)
         {
-            Parar();
+            PatrulharOuParar();
             return;
         }
 
-        if (_sprite != null && Mathf.Abs(diferenca.x) > 0.02f)
-        {
-            bool direita = diferenca.x > 0f;
-            bool transformInvertido = transform.right.x * transform.lossyScale.x < 0f;
-            _sprite.flipX = (direita != _spriteOriginalOlhaDireita) ^ transformInvertido;
-        }
+        // A perseguicao tem prioridade, inclusive durante uma pausa da patrulha.
+        _patrulhando = false;
+        AtualizarVisual(diferenca.x);
 
         ColliderDistance2D distancia = _corpo.Distance(_corpoAlvo);
         bool noAlcance = distancia.isValid && distancia.distance <= _alcanceAtaque;
@@ -107,6 +118,85 @@ public class AtaqueInimigo : MonoBehaviour
         }
 
         _rig.linearVelocity = new Vector2(direcao * _velocidade, _rig.linearVelocity.y);
+    }
+
+    private void PatrulharOuParar()
+    {
+        if (!_ativarPatrulha || _velocidadePatrulha <= 0f)
+        {
+            _patrulhando = false;
+            Parar();
+            return;
+        }
+
+        float x = _rig.position.x;
+        float raio = Mathf.Max(0.1f, _raioPatrulha);
+        float esquerda = _origemPatrulha.x - raio;
+        float direita = _origemPatrulha.x + raio;
+
+        if (!_patrulhando)
+        {
+            _patrulhando = true;
+            _retomarPatrulha = 0f;
+            // Se a perseguicao levou para fora da area, volte em direcao a ela.
+            _direcaoPatrulha = x >= _origemPatrulha.x ? -1f : 1f;
+        }
+
+        if (Time.time < _retomarPatrulha)
+        {
+            Parar();
+            return;
+        }
+
+        float destino = _direcaoPatrulha > 0f ? direita : esquerda;
+        float restante = (destino - x) * _direcaoPatrulha;
+        if (restante <= 0.02f)
+        {
+            InverterPatrulha();
+            return;
+        }
+
+        if (TemLimite(_direcaoPatrulha))
+        {
+            Parar();
+            // Nao fique alternando de lado se os dois sentidos estiverem bloqueados.
+            // Fora da area, aguarde em vez de caminhar ainda mais para longe.
+            if (x >= esquerda && x <= direita && !TemLimite(-_direcaoPatrulha))
+                InverterPatrulha();
+            return;
+        }
+
+        AtualizarVisual(_direcaoPatrulha);
+        // Evita passar do destino mesmo com velocidade alta ou uma area pequena.
+        float velocidade = Mathf.Min(_velocidadePatrulha, restante / Time.fixedDeltaTime);
+        _rig.linearVelocity = new Vector2(_direcaoPatrulha * velocidade, _rig.linearVelocity.y);
+    }
+
+    private void InverterPatrulha()
+    {
+        Parar();
+        _direcaoPatrulha = -_direcaoPatrulha;
+        _retomarPatrulha = Time.time + Mathf.Max(0f, _pausaPatrulha);
+    }
+
+    private void AtualizarVisual(float direcao)
+    {
+        if (_sprite == null || Mathf.Abs(direcao) <= 0.02f) return;
+        bool direita = direcao > 0f;
+        bool transformInvertido = transform.right.x * transform.lossyScale.x < 0f;
+        _sprite.flipX = (direita != _spriteOriginalOlhaDireita) ^ transformInvertido;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (!_ativarPatrulha) return;
+        Vector3 centro = Application.isPlaying ? _origemPatrulha : transform.position;
+        Vector3 deslocamento = Vector3.right * Mathf.Max(0.1f, _raioPatrulha);
+        Vector3 marca = Vector3.up * 0.25f;
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(centro - deslocamento, centro + deslocamento);
+        Gizmos.DrawLine(centro - deslocamento - marca, centro - deslocamento + marca);
+        Gizmos.DrawLine(centro + deslocamento - marca, centro + deslocamento + marca);
     }
 
     private void OnTriggerEnter2D(Collider2D outro)
@@ -152,6 +242,7 @@ public class AtaqueInimigo : MonoBehaviour
 
     private void OnDisable()
     {
+        _patrulhando = false;
         _limites.Clear();
     }
 

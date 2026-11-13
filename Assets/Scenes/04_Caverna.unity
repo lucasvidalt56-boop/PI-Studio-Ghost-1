@@ -168,7 +168,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.41
   m_Color: {r: 1, g: 0.8862745, b: 0.6745098, a: 1}
-  m_Intensity: 0.47
+  m_Intensity: 0.39
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -2259,7 +2259,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -4585306212177670430, guid: 00b8d65732e2055498d6deb20935e4e6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.76862746, g: 0.72156864, b: 0.65882355, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -33166,7 +33166,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620083755}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0076653273, w: 0.9999706}
   m_LocalPosition: {x: -0.03629303, y: -1.8794422, z: 0.02359764}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -33190,7 +33190,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 0.8862745, b: 0.6745098, a: 1}
-  m_Intensity: 0.91
+  m_Intensity: 0.66
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -33211,10 +33211,10 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 183.19998
-  m_PointLightOuterAngle: 229.87
-  m_PointLightInnerRadius: 1.32
-  m_PointLightOuterRadius: 3.6884372
+  m_PointLightInnerAngle: 222.34
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 1.41
+  m_PointLightOuterRadius: 6.481748
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -33829,6 +33829,10 @@ MonoBehaviour:
   _camadaLimite:
     serializedVersion: 2
     m_Bits: 1024
+  _ativarPatrulha: 0
+  _raioPatrulha: 2
+  _velocidadePatrulha: 1
+  _pausaPatrulha: 1
   _sprite: {fileID: 0}
   _spriteOriginalOlhaDireita: 0
 --- !u!61 &1753491890
@@ -34474,7 +34478,7 @@ Transform:
   m_GameObject: {fileID: 1918555173}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 81.95, y: 6.242, z: 0}
+  m_LocalPosition: {x: 79.44, y: 6.242, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -34509,6 +34513,10 @@ MonoBehaviour:
   _camadaLimite:
     serializedVersion: 2
     m_Bits: 1024
+  _ativarPatrulha: 1
+  _raioPatrulha: 3.39
+  _velocidadePatrulha: 1.5
+  _pausaPatrulha: 1
   _sprite: {fileID: 0}
   _spriteOriginalOlhaDireita: 0
 --- !u!50 &1918555177
