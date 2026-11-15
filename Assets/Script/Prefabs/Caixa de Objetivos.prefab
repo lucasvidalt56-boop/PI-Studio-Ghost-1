@@ -117,7 +117,7 @@ MonoBehaviour:
   _espacoCabecalho: 50
   _alturaLinha: 40
   _espacoEntreLinhas: 6
-  _margemEsquerda: 24
+  _margemEsquerda: 32
   _margemDireita: 16
   _margemInferior: 16
   _tamanhoMarcacao: 24
@@ -265,7 +265,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 55, y: -23}
+  m_AnchoredPosition: {x: 55, y: -25.7}
   m_SizeDelta: {x: 280, y: 26}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5383645657158825980
@@ -479,7 +479,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -14, y: -17}
+  m_AnchoredPosition: {x: -5, y: -18}
   m_SizeDelta: {x: -76, y: -66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5169813852580638060
@@ -510,12 +510,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'OBJETIVO
-
-'
+  m_text: OBJETIVO
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2141126457b551244b6da76aca17cddf, type: 2}
-  m_sharedMaterial: {fileID: 5963997309073147840, guid: 2141126457b551244b6da76aca17cddf, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -539,10 +537,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 24
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 22
   m_fontStyle: 1

@@ -926,6 +926,7 @@ MonoBehaviour:
   _espada: {fileID: 11400000, guid: 8e8929d314ccc3942b57485236319205, type: 2}
   _pocaoPuloDuplo: {fileID: 5729478989553502427}
   _intensidadePuloDuplo: 1
+  _tempoMaximoGolpe: 1.2
 --- !u!114 &2764331497949297887
 MonoBehaviour:
   m_ObjectHideFlags: 0

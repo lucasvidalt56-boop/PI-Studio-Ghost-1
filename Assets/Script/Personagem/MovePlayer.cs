@@ -31,6 +31,12 @@ public class Move : MonoBehaviour
 
     [SerializeField, Min(0.1f)] float _intensidadePuloDuplo = 1f;
 
+    [Header("Seguranca do ataque")]
+    [Tooltip("Deixe maior que a duracao completa do golpe. So libera a trava se o evento final nao acontecer.")]
+    [SerializeField, Min(0.1f)] float _tempoMaximoGolpe = 1.2f;
+
+    float _tempoGolpe;
+
     bool _usouPuloDuplo;
     bool _atacando;
     bool _minerando;
@@ -97,6 +103,11 @@ public class Move : MonoBehaviour
         if (_pocaoPuloDuplo != null &&
             _pocaoPuloDuplo.Consumir()) return;
 
+        // Aguarda a saida do golpe anterior antes de aceitar outro.
+        if (_animator.IsInTransition(0)) return;
+        AnimatorStateInfo estado = _animator.GetCurrentAnimatorStateInfo(0);
+        if (estado.IsName("Atacando") || estado.IsName("Minerando")) return;
+
         if (!value.performed || !_checkGround || _minerando || _atacando) return;
         if (_inventario == null) return;
 
@@ -119,6 +130,7 @@ public class Move : MonoBehaviour
             return;
         }
 
+        _tempoGolpe = 0f;
         _rig2d.linearVelocityX = 0;
         _animator.SetBool("Andando", false);
         _animator.SetBool("Correndo", false);
@@ -135,6 +147,16 @@ public class Move : MonoBehaviour
     {
         _atacando = false;
         _animator.SetBool("Atacando", false);
+    }
+
+    void OnDisable()
+    {
+        _atacando = false;
+        _minerando = false;
+        _tempoGolpe = 0f;
+        if (_animator == null) return;
+        _animator.SetBool("Atacando", false);
+        _animator.SetBool("Minerando", false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -180,8 +202,16 @@ public class Move : MonoBehaviour
 
         if (_minerando || _atacando)
         {
+            _tempoGolpe += Time.deltaTime;
             _rig2d.linearVelocityX = 0;
-            return;
+
+            if (_tempoGolpe < _tempoMaximoGolpe) return;
+
+            // Protecao: o evento final nao liberou a personagem a tempo.
+            if (_atacando) FinalizarAtaque();
+            if (_minerando) FinalizarMineracao();
+            _tempoGolpe = 0f;
+            Debug.LogWarning("Golpe liberado pelo tempo de seguranca. Confira os eventos finais e as transicoes do Animator.", this);
         }
 
         if (_checkGround)

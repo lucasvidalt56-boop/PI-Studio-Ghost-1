@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,42 +10,50 @@ public class AtaqueInimigo : MonoBehaviour
     [SerializeField, Min(1)] private int _vidaMaxima = 40;
     [SerializeField, Min(1)] private int _dano = 10;
     [SerializeField, Min(0.1f)] private float _intervaloAtaques = 1f;
-    [Tooltip("Distancia entre as bordas dos colliders para atacar.")]
     [SerializeField, Min(0f)] private float _alcanceAtaque = 0.15f;
     [SerializeField] private int _vidaAtual;
 
     [Header("Perseguicao")]
     [SerializeField, Min(0f)] private float _velocidade = 2.5f;
     [SerializeField, Min(0.1f)] private float _distanciaPerseguicao = 8f;
-    [Tooltip("Opcional: paredes/chao que bloqueiam ataques. Nao inclua Player ou Inimigos.")]
     [SerializeField] private LayerMask _camadaObstaculos;
     [SerializeField] private LayerMask _camadaLimite;
 
     [Header("Patrulha opcional")]
-    [Tooltip("Ative apenas nos inimigos que devem andar quando nao estiverem perseguindo.")]
     [SerializeField] private bool _ativarPatrulha = false;
-    [Tooltip("Distancia para CADA lado da posicao inicial. 2 significa uma faixa total de 4 unidades.")]
     [SerializeField, Min(0.1f)] private float _raioPatrulha = 2f;
     [SerializeField, Min(0f)] private float _velocidadePatrulha = 1f;
-    [Tooltip("Tempo parado antes de voltar na outra direcao.")]
     [SerializeField, Min(0f)] private float _pausaPatrulha = 1f;
 
     [Header("Visual")]
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private bool _spriteOriginalOlhaDireita = true;
 
+    [Header("Animacao opcional")]
+    [SerializeField] private Animator _animator;
+    [SerializeField] private float _velocidadeMinimaAnimacao = 0.05f;
+
+    private static readonly int AndandoHash =
+        Animator.StringToHash("Andando");
+
+    private bool _temAnimacaoAndando;
+
     private Rigidbody2D _rig;
     private BoxCollider2D _corpo;
     private CombatePlayer _alvo;
     private Collider2D _corpoAlvo;
+
     private float _proximaBusca;
     private float _proximoAtaque;
     private bool _morta;
+
     private Vector3 _origemPatrulha;
     private bool _patrulhando;
     private float _direcaoPatrulha = 1f;
     private float _retomarPatrulha;
-    private readonly Dictionary<Collider2D, float> _limites = new Dictionary<Collider2D, float>();
+
+    private readonly Dictionary<Collider2D, float> _limites =
+        new Dictionary<Collider2D, float>();
 
     public int VidaAtual => _vidaAtual;
 
@@ -52,7 +61,28 @@ public class AtaqueInimigo : MonoBehaviour
     {
         _rig = GetComponent<Rigidbody2D>();
         _corpo = GetComponent<BoxCollider2D>();
-        if (_sprite == null) _sprite = GetComponent<SpriteRenderer>();
+
+        if (_sprite == null)
+            _sprite = GetComponent<SpriteRenderer>();
+
+        if (_animator == null)
+            _animator = GetComponentInChildren<Animator>();
+
+        if (_animator != null &&
+            _animator.runtimeAnimatorController != null)
+        {
+            foreach (AnimatorControllerParameter parametro
+                in _animator.parameters)
+            {
+                if (parametro.name == "Andando" &&
+                    parametro.type == AnimatorControllerParameterType.Bool)
+                {
+                    _temAnimacaoAndando = true;
+                    break;
+                }
+            }
+        }
+
         _rig.freezeRotation = true;
         _vidaAtual = Mathf.Max(1, _vidaMaxima);
         _origemPatrulha = transform.position;
@@ -62,67 +92,105 @@ public class AtaqueInimigo : MonoBehaviour
     {
         if (_morta) return;
 
-        // A personagem pode ser criada pelo ChegadaIgreja depois da cobra.
+        // Procura a personagem mesmo se ela surgir depois.
         if (_alvo == null && Time.time >= _proximaBusca)
         {
             _proximaBusca = Time.time + 0.5f;
             _alvo = FindFirstObjectByType<CombatePlayer>();
+
             if (_alvo != null)
             {
                 _corpoAlvo = _alvo.GetComponent<Collider2D>();
-                // Prefira o collider fisico, nunca um sensor de chao/itens.
-                foreach (Collider2D col in _alvo.GetComponents<Collider2D>())
-                    if (col.enabled && !col.isTrigger) { _corpoAlvo = col; break; }
+
+                foreach (Collider2D col in
+                    _alvo.GetComponents<Collider2D>())
+                {
+                    if (col.enabled && !col.isTrigger)
+                    {
+                        _corpoAlvo = col;
+                        break;
+                    }
+                }
             }
         }
 
-        if (_alvo == null || !_alvo.isActiveAndEnabled || _alvo.EstaMorto ||
-            _corpoAlvo == null || !_corpoAlvo.enabled)
+        if (_alvo == null ||
+            !_alvo.isActiveAndEnabled ||
+            _alvo.EstaMorto ||
+            _corpoAlvo == null ||
+            !_corpoAlvo.enabled)
         {
             PatrulharOuParar();
             return;
         }
 
-        Vector2 diferenca = (Vector2)_corpoAlvo.bounds.center - (Vector2)_corpo.bounds.center;
-        if (diferenca.sqrMagnitude > _distanciaPerseguicao * _distanciaPerseguicao)
+        Vector2 diferenca =
+            (Vector2)_corpoAlvo.bounds.center -
+            (Vector2)_corpo.bounds.center;
+
+        if (diferenca.sqrMagnitude >
+            _distanciaPerseguicao * _distanciaPerseguicao)
         {
             PatrulharOuParar();
             return;
         }
 
-        // A perseguicao tem prioridade, inclusive durante uma pausa da patrulha.
+        // Perseguicao tem prioridade sobre a patrulha.
         _patrulhando = false;
         AtualizarVisual(diferenca.x);
 
-        ColliderDistance2D distancia = _corpo.Distance(_corpoAlvo);
-        bool noAlcance = distancia.isValid && distancia.distance <= _alcanceAtaque;
-        bool bloqueado = Physics2D.Linecast(_corpo.bounds.center, _corpoAlvo.bounds.center,
-            _camadaObstaculos).collider != null;
+        ColliderDistance2D distancia =
+            _corpo.Distance(_corpoAlvo);
+
+        bool noAlcance =
+            distancia.isValid &&
+            distancia.distance <= _alcanceAtaque;
+
+        bool bloqueado = Physics2D.Linecast(
+            _corpo.bounds.center,
+            _corpoAlvo.bounds.center,
+            _camadaObstaculos
+        ).collider != null;
 
         if (noAlcance)
         {
             Parar();
-            if (!bloqueado && Time.time >= _proximoAtaque)
+
+            if (!bloqueado &&
+                Time.time >= _proximoAtaque)
             {
-                _proximoAtaque = Time.time + Mathf.Max(0.1f, _intervaloAtaques);
+                _proximoAtaque =
+                    Time.time + Mathf.Max(
+                        0.1f, _intervaloAtaques
+                    );
+
                 _alvo.ReceberDano(_dano);
             }
+
             return;
         }
 
-        float direcao = Mathf.Abs(diferenca.x) > 0.05f ? Mathf.Sign(diferenca.x) : 0f;
+        float direcao =
+            Mathf.Abs(diferenca.x) > 0.05f
+            ? Mathf.Sign(diferenca.x)
+            : 0f;
+
         if (TemLimite(direcao))
         {
             Parar();
             return;
         }
 
-        _rig.linearVelocity = new Vector2(direcao * _velocidade, _rig.linearVelocity.y);
+        _rig.linearVelocity = new Vector2(
+            direcao * _velocidade,
+            _rig.linearVelocity.y
+        );
     }
 
     private void PatrulharOuParar()
     {
-        if (!_ativarPatrulha || _velocidadePatrulha <= 0f)
+        if (!_ativarPatrulha ||
+            _velocidadePatrulha <= 0f)
         {
             _patrulhando = false;
             Parar();
@@ -131,6 +199,7 @@ public class AtaqueInimigo : MonoBehaviour
 
         float x = _rig.position.x;
         float raio = Mathf.Max(0.1f, _raioPatrulha);
+
         float esquerda = _origemPatrulha.x - raio;
         float direita = _origemPatrulha.x + raio;
 
@@ -138,8 +207,9 @@ public class AtaqueInimigo : MonoBehaviour
         {
             _patrulhando = true;
             _retomarPatrulha = 0f;
-            // Se a perseguicao levou para fora da area, volte em direcao a ela.
-            _direcaoPatrulha = x >= _origemPatrulha.x ? -1f : 1f;
+
+            _direcaoPatrulha =
+                x >= _origemPatrulha.x ? -1f : 1f;
         }
 
         if (Time.time < _retomarPatrulha)
@@ -148,8 +218,14 @@ public class AtaqueInimigo : MonoBehaviour
             return;
         }
 
-        float destino = _direcaoPatrulha > 0f ? direita : esquerda;
-        float restante = (destino - x) * _direcaoPatrulha;
+        float destino =
+            _direcaoPatrulha > 0f
+            ? direita
+            : esquerda;
+
+        float restante =
+            (destino - x) * _direcaoPatrulha;
+
         if (restante <= 0.02f)
         {
             InverterPatrulha();
@@ -159,44 +235,102 @@ public class AtaqueInimigo : MonoBehaviour
         if (TemLimite(_direcaoPatrulha))
         {
             Parar();
-            // Nao fique alternando de lado se os dois sentidos estiverem bloqueados.
-            // Fora da area, aguarde em vez de caminhar ainda mais para longe.
-            if (x >= esquerda && x <= direita && !TemLimite(-_direcaoPatrulha))
+
+            if (x >= esquerda &&
+                x <= direita &&
+                !TemLimite(-_direcaoPatrulha))
+            {
                 InverterPatrulha();
+            }
+
             return;
         }
 
         AtualizarVisual(_direcaoPatrulha);
-        // Evita passar do destino mesmo com velocidade alta ou uma area pequena.
-        float velocidade = Mathf.Min(_velocidadePatrulha, restante / Time.fixedDeltaTime);
-        _rig.linearVelocity = new Vector2(_direcaoPatrulha * velocidade, _rig.linearVelocity.y);
+
+        float velocidade = Mathf.Min(
+            _velocidadePatrulha,
+            restante / Time.fixedDeltaTime
+        );
+
+        _rig.linearVelocity = new Vector2(
+            _direcaoPatrulha * velocidade,
+            _rig.linearVelocity.y
+        );
     }
 
     private void InverterPatrulha()
     {
         Parar();
+
         _direcaoPatrulha = -_direcaoPatrulha;
-        _retomarPatrulha = Time.time + Mathf.Max(0f, _pausaPatrulha);
+
+        _retomarPatrulha =
+            Time.time + Mathf.Max(0f, _pausaPatrulha);
     }
 
     private void AtualizarVisual(float direcao)
     {
-        if (_sprite == null || Mathf.Abs(direcao) <= 0.02f) return;
+        if (_sprite == null ||
+            Mathf.Abs(direcao) <= 0.02f)
+            return;
+
         bool direita = direcao > 0f;
-        bool transformInvertido = transform.right.x * transform.lossyScale.x < 0f;
-        _sprite.flipX = (direita != _spriteOriginalOlhaDireita) ^ transformInvertido;
+
+        bool transformInvertido =
+            transform.right.x * transform.lossyScale.x < 0f;
+
+        _sprite.flipX =
+            (direita != _spriteOriginalOlhaDireita)
+            ^ transformInvertido;
+    }
+
+    //controla a animacao automaticamente.
+    private void LateUpdate()
+    {
+        if (!_temAnimacaoAndando ||
+            _animator == null ||
+            !_animator.isActiveAndEnabled)
+            return;
+
+        bool andando =
+            !_morta &&
+            Mathf.Abs(_rig.linearVelocity.x) >
+            _velocidadeMinimaAnimacao;
+
+        _animator.SetBool(AndandoHash, andando);
     }
 
     private void OnDrawGizmosSelected()
     {
         if (!_ativarPatrulha) return;
-        Vector3 centro = Application.isPlaying ? _origemPatrulha : transform.position;
-        Vector3 deslocamento = Vector3.right * Mathf.Max(0.1f, _raioPatrulha);
+
+        Vector3 centro =
+            Application.isPlaying
+            ? _origemPatrulha
+            : transform.position;
+
+        Vector3 deslocamento =
+            Vector3.right * Mathf.Max(0.1f, _raioPatrulha);
+
         Vector3 marca = Vector3.up * 0.25f;
+
         Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(centro - deslocamento, centro + deslocamento);
-        Gizmos.DrawLine(centro - deslocamento - marca, centro - deslocamento + marca);
-        Gizmos.DrawLine(centro + deslocamento - marca, centro + deslocamento + marca);
+
+        Gizmos.DrawLine(
+            centro - deslocamento,
+            centro + deslocamento
+        );
+
+        Gizmos.DrawLine(
+            centro - deslocamento - marca,
+            centro - deslocamento + marca
+        );
+
+        Gizmos.DrawLine(
+            centro + deslocamento - marca,
+            centro + deslocamento + marca
+        );
     }
 
     private void OnTriggerEnter2D(Collider2D outro)
@@ -211,16 +345,30 @@ public class AtaqueInimigo : MonoBehaviour
 
     private void RegistrarLimite(Collider2D outro)
     {
-        if (!isActiveAndEnabled || _morta || !outro.isTrigger ||
-            (_camadaLimite.value & (1 << outro.gameObject.layer)) == 0 ||
-            _limites.ContainsKey(outro)) return;
+        if (!isActiveAndEnabled ||
+            _morta ||
+            !outro.isTrigger ||
+            (_camadaLimite.value &
+            (1 << outro.gameObject.layer)) == 0 ||
+            _limites.ContainsKey(outro))
+            return;
 
-        // Guarda o lado de entrada para permitir recuar, sem atravessar o limite.
-        float lado = Mathf.Abs(_rig.linearVelocity.x) > 0.01f
-            ? _rig.linearVelocity.x : outro.bounds.center.x - _corpo.bounds.center.x;
-        float direcao = Mathf.Abs(lado) > 0.01f ? Mathf.Sign(lado) : 0f;
+        float lado =
+            Mathf.Abs(_rig.linearVelocity.x) > 0.01f
+            ? _rig.linearVelocity.x
+            : outro.bounds.center.x -
+              _corpo.bounds.center.x;
+
+        float direcao =
+            Mathf.Abs(lado) > 0.01f
+            ? Mathf.Sign(lado)
+            : 0f;
+
         _limites.Add(outro, direcao);
-        if (direcao == 0f || _rig.linearVelocity.x * direcao > 0f) Parar();
+
+        if (direcao == 0f ||
+            _rig.linearVelocity.x * direcao > 0f)
+            Parar();
     }
 
     private bool TemLimite(float direcao)
@@ -228,10 +376,20 @@ public class AtaqueInimigo : MonoBehaviour
         foreach (var limite in _limites)
         {
             Collider2D trigger = limite.Key;
-            if (trigger == null || !trigger.enabled || !trigger.gameObject.activeInHierarchy ||
-                !trigger.isTrigger || (_camadaLimite.value & (1 << trigger.gameObject.layer)) == 0) continue;
-            if (limite.Value == 0f || direcao * limite.Value > 0f) return true;
+
+            if (trigger == null ||
+                !trigger.enabled ||
+                !trigger.gameObject.activeInHierarchy ||
+                !trigger.isTrigger ||
+                (_camadaLimite.value &
+                (1 << trigger.gameObject.layer)) == 0)
+                continue;
+
+            if (limite.Value == 0f ||
+                direcao * limite.Value > 0f)
+                return true;
         }
+
         return false;
     }
 
@@ -248,18 +406,29 @@ public class AtaqueInimigo : MonoBehaviour
 
     public void ReceberDano(int quantidade)
     {
-        if (_morta || quantidade <= 0) return;
-        _vidaAtual -= Mathf.Min(quantidade, _vidaAtual);
-        if (_vidaAtual > 0) return;
+        if (_morta || quantidade <= 0)
+            return;
+
+        _vidaAtual -= Mathf.Min(
+            quantidade, _vidaAtual
+        );
+
+        if (_vidaAtual > 0)
+            return;
 
         _morta = true;
+
         Parar();
+
         gameObject.SetActive(false);
         Destroy(gameObject);
     }
 
     private void Parar()
     {
-        _rig.linearVelocity = new Vector2(0f, _rig.linearVelocity.y);
+        _rig.linearVelocity = new Vector2(
+            0f,
+            _rig.linearVelocity.y
+        );
     }
 }
