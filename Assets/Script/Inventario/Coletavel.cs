@@ -8,7 +8,7 @@ public class Coletavel : MonoBehaviour
     [SerializeField] string _idSave;
 
     [Header("Objetivo opcional")]
-    [Tooltip("Arraste o GatilhoObjetivo desta coleta, configurado como Apos Interacao Concluida. Se vazio, procura no mesmo objeto.")]
+    [Tooltip("Arraste o GatilhoObjetivo desta coleta, configurado como Ao Coletar Item (ou o modo manual antigo). Se vazio, procura no mesmo objeto.")]
     [SerializeField] GatilhoObjetivo _objetivoColeta;
 
     bool _coletado;
@@ -40,13 +40,20 @@ public class Coletavel : MonoBehaviour
 
     void AtualizarSprite()
     {
-        GetComponent<SpriteRenderer>().sprite =
-            _item != null ? _item.Sprite : null;
+        // Sem Item configurado, preserve a imagem existente.
+        if (_item != null && _item.Sprite != null)
+            GetComponent<SpriteRenderer>().sprite = _item.Sprite;
     }
 
     public void Coletar(Inventario inventario)
     {
         if (_coletado || !isActiveAndEnabled || inventario == null) return;
+
+        if (_item == null)
+        {
+            Debug.LogWarning("Coletavel: preencha Item. Em baus, use BauAbrivel e GatilhoObjetivo.", this);
+            return;
+        }
 
         if (string.IsNullOrWhiteSpace(_idSave))
         {
@@ -66,7 +73,7 @@ public class Coletavel : MonoBehaviour
             _objetivoColeta = GetComponent<GatilhoObjetivo>();
 
         if (_objetivoColeta != null)
-            _objetivoColeta.ConfirmarInteracao();
+            _objetivoColeta.ConfirmarColeta();
 
         gameObject.SetActive(false);
         Destroy(gameObject);

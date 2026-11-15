@@ -3519,7 +3519,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 659370165797998616, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: m_fontSize
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 659370165797998616, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: m_fontAsset
@@ -3531,7 +3531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 659370165797998616, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: m_fontSizeBase
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 659370165797998616, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: m_sharedMaterial
@@ -3626,24 +3626,70 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _alturaLinha
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: _margemEsquerda
       value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _espacoCabecalho
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: _tamanhoMarcacao
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _espacoEntreLinhas
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: _objetivos.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: _objetivos.Array.data[0].id
-      value: altar
+      value: abra bau
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _objetivos.Array.data[1].id
+      value: matinta
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _objetivos.Array.data[2].id
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: _objetivos.Array.data[0].texto
-      value: ENCONTRE O ALTAR
+      value: 'ABRA O BAU
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _objetivos.Array.data[1].texto
+      value: 'DERROTE A MATINTA
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _objetivos.Array.data[2].texto
+      value: 'DERROTE A MATINTA
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _objetivos.Array.data[0].quantidade
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _objetivos.Array.data[1].quantidade
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _objetivos.Array.data[2].quantidade
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: _aoConcluirTodos.m_PersistentCalls.m_Calls.Array.size
@@ -3651,6 +3697,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: _aoConcluirTodos.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _objetivos.Array.data[0].aoConcluir.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _objetivos.Array.data[0].aoConcluir.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3977209229642837470, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
@@ -4309,10 +4363,35 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 597670516586185066, guid: ff8b0d057ea174d408f743885d896460, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1167369052}
     - targetCorrespondingSourceObject: {fileID: 3882661685753872335, guid: ff8b0d057ea174d408f743885d896460, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: ff8b0d057ea174d408f743885d896460, type: 3}
+--- !u!1 &1167369045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 597670516586185066, guid: ff8b0d057ea174d408f743885d896460, type: 3}
+  m_PrefabInstance: {fileID: 1137095797}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1167369052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167369045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df7cfb4c3b6a514ab5eefafd02d8cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _modoAtivacao: 3
+  _caixa: {fileID: 910970237}
+  _acao: 1
+  _idObjetivo: abra bau
+  _tagJogador: Player
 --- !u!1 &1207800775
 GameObject:
   m_ObjectHideFlags: 0
@@ -4493,7 +4572,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 3.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -34183,8 +34262,6 @@ MonoBehaviour:
   _pausaPatrulha: 1
   _sprite: {fileID: 0}
   _spriteOriginalOlhaDireita: 0
-  _animator: {fileID: 0}
-  _velocidadeMinimaAnimacao: 0.05
 --- !u!61 &1753491890
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -34758,6 +34835,7 @@ GameObject:
   - component: {fileID: 1918555177}
   - component: {fileID: 1918555176}
   - component: {fileID: 1918555179}
+  - component: {fileID: 1918555180}
   m_Layer: 8
   m_Name: Matinta
   m_TagString: Untagged
@@ -34870,8 +34948,6 @@ MonoBehaviour:
   _pausaPatrulha: 1
   _sprite: {fileID: 0}
   _spriteOriginalOlhaDireita: 1
-  _animator: {fileID: 1918555179}
-  _velocidadeMinimaAnimacao: 0.05
 --- !u!50 &1918555177
 Rigidbody2D:
   serializedVersion: 5
@@ -34967,6 +35043,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1918555180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918555173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df7cfb4c3b6a514ab5eefafd02d8cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _modoAtivacao: 5
+  _caixa: {fileID: 910970237}
+  _acao: 1
+  _idObjetivo: matinta
+  _tagJogador: Player
 --- !u!1 &1953653638
 GameObject:
   m_ObjectHideFlags: 0

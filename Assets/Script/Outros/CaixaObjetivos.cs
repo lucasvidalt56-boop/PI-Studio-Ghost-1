@@ -15,6 +15,8 @@ public class CaixaObjetivos : MonoBehaviour
         [Tooltip("ID unico nesta caixa. Exemplo: pegar_picareta")]
         public string id;
         [TextArea(2, 4)] public string texto;
+        [Tooltip("Quantas acoes completam esta linha. Exemplo: 3 para coletar tres cristais.")]
+        [Min(1)] public int quantidade = 1;
         [Tooltip("Executado quando o certo DESTA linha terminar de animar.")]
         public UnityEvent aoConcluir = new UnityEvent();
     }
@@ -59,6 +61,8 @@ public class CaixaObjetivos : MonoBehaviour
     {
         public Objetivo objetivo;
         public Image icone;
+        public TMP_Text texto;
+        public int progresso;
         public bool concluida;
         public bool notificada;
         public float tempoAnimacao;
@@ -170,7 +174,8 @@ public class CaixaObjetivos : MonoBehaviour
         rt.anchoredPosition3D = new Vector3(-_margemDireita - _tamanhoMarcacao * 0.5f,
             -topo - altura * 0.5f, 0f);
 
-        Linha linha = new Linha { objetivo = objetivo, icone = icone };
+        Linha linha = new Linha { objetivo = objetivo, icone = icone, texto = texto };
+        AtualizarTexto(linha);
         _linhas.Add(linha);
         _porId.Add(objetivo.id, linha);
     }
@@ -208,10 +213,37 @@ public class CaixaObjetivos : MonoBehaviour
         if (!_pronta || !isActiveAndEnabled || string.IsNullOrWhiteSpace(id) ||
             !_porId.TryGetValue(id, out Linha linha) || linha.concluida) return false;
         MostrarTodos();
+        linha.progresso = Mathf.Max(1, linha.objetivo.quantidade);
+        AtualizarTexto(linha);
         linha.concluida = true;
         linha.tempoAnimacao = 0f;
         // Se a caixa ainda estiver entrando, espera ficar visivel para animar.
         return true;
+    }
+
+    // Cada objeto confirmado soma uma unidade. As chamadas antigas de Concluir
+    // continuam concluindo a linha inteira (usadas, por exemplo, pelo urubu).
+    public bool TentarAdicionarProgresso(string id, int quantidade = 1)
+    {
+        if (!_pronta || !isActiveAndEnabled || quantidade <= 0 ||
+            string.IsNullOrWhiteSpace(id) || !_porId.TryGetValue(id, out Linha linha))
+            return false;
+        if (linha.concluida) return true;
+
+        MostrarTodos();
+        int meta = Mathf.Max(1, linha.objetivo.quantidade);
+        linha.progresso += Mathf.Min(quantidade, meta - linha.progresso);
+        AtualizarTexto(linha);
+        if (linha.progresso >= meta) TentarConcluirObjetivo(id);
+        return true;
+    }
+
+    private void AtualizarTexto(Linha linha)
+    {
+        int meta = Mathf.Max(1, linha.objetivo.quantidade);
+        linha.texto.text = meta > 1
+            ? $"{linha.objetivo.texto} ({linha.progresso}/{meta})"
+            : linha.objetivo.texto;
     }
 
     private void Update()

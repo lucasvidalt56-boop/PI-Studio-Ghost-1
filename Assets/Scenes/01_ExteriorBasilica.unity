@@ -1609,7 +1609,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 3.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2017,8 +2017,20 @@ PrefabInstance:
       value: porta igreja
       objectReference: {fileID: 0}
     - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _objetivos.Array.data[1].id
+      value: porta igreja
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: _objetivos.Array.data[0].texto
-      value: SIGA O URUBU
+      value: 'SIGA O URUBU
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
+      propertyPath: _objetivos.Array.data[1].texto
+      value: 'SIGA O URUBU
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 3278541729162547414, guid: a487b79358d0af948addb4242e69e1a6, type: 3}
       propertyPath: _objetivos.Array.data[0].aoConcluir.m_PersistentCalls.m_Calls.Array.size
@@ -2924,6 +2936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cenaDestino: 02_InteriorBasilica
+  _tempoMostrarObjetivo: 0.8
 --- !u!114 &1201175770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4474,7 +4487,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.015602112, y: 0.9048556}
+  m_Offset: {x: 0.78871536, y: 0.9048556}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4484,7 +4497,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.5481567, y: 2.8097107}
+  m_Size: {x: 5.0943832, y: 2.8097107}
   m_EdgeRadius: 0
 --- !u!1 &2031134422
 GameObject:

@@ -4,35 +4,44 @@ using UnityEngine;
 public class GatilhoObjetivo : MonoBehaviour
 {
     public enum Acao { Mostrar, Concluir }
-    public enum ModoAtivacao { AoEntrarNaArea = 0, AposInteracaoConcluida = 1 }
+    // Os dois primeiros valores preservam os componentes que voce ja configurou.
+    public enum ModoAtivacao
+    {
+        AoEntrarNaArea = 0,
+        AposInteracaoConcluida = 1,
+        AoColetarItem = 2,
+        AoAbrirBau = 3,
+        AoEntrarNaPorta = 4,
+        AoDerrotarInimigo = 5,
+        AoQuebrarPedra = 6
+    }
 
     [Header("Quando ativar")]
-    [Tooltip("Ao Entrar Na Area: basta passar pelo trigger. Apos Interacao Concluida: o script da acao precisa chamar ConfirmarInteracao() depois do sucesso.")]
+    [Tooltip("Escolha a acao real deste objeto. O modo de area continua funcionando ao passar pelo trigger.")]
     [SerializeField] private ModoAtivacao _modoAtivacao = ModoAtivacao.AoEntrarNaArea;
 
     [Header("Objetivo")]
-    [Tooltip("Arraste a caixa aqui. Se vazio, procura uma caixa ativa na cena.")]
+    [Tooltip("No prefab, pode ficar vazio: procura a unica caixa ativa da cena. Com varias caixas, arraste a correta.")]
     [SerializeField] private CaixaObjetivos _caixa;
+    [Tooltip("Concluir soma 1 na meta. Mostrar apenas exibe a caixa.")]
     [SerializeField] private Acao _acao = Acao.Concluir;
     [SerializeField] private string _idObjetivo = "entrar_basilica";
 
     [Header("Jogador (somente no modo de area)")]
-    [Tooltip("Tag do objeto que possui o Rigidbody2D do jogador.")]
     [SerializeField] private string _tagJogador = "Player";
 
     private bool _executado;
     private float _proximaTentativa;
 
+    // Usado pela porta para dar tempo de mostrar a marcacao antes de trocar a cena.
+    public bool ObjetivoAcionado => _executado;
+
     private void Awake()
     {
-        // Interacoes nao precisam de collider e nao alteram o collider do item/porta/pedra.
-        // No modo de area, use este componente em um objeto separado com BoxCollider2D.
         if (_modoAtivacao != ModoAtivacao.AoEntrarNaArea) return;
         BoxCollider2D area = GetComponent<BoxCollider2D>();
-        if (area != null)
-            area.isTrigger = true;
-        else
-            Debug.LogWarning("GatilhoObjetivo: no modo Ao Entrar Na Area, adicione um BoxCollider2D com Is Trigger em um objeto separado.", this);
+        if (area != null) area.isTrigger = true;
+        else Debug.LogWarning("GatilhoObjetivo: para entrar numa area, use um objeto separado com BoxCollider2D e Is Trigger.", this);
     }
 
     private void OnTriggerEnter2D(Collider2D outro) { TentarAtivarPorArea(outro); }
@@ -48,25 +57,45 @@ public class GatilhoObjetivo : MonoBehaviour
         ExecutarObjetivo();
     }
 
-    // Pode ser selecionado em UnityEvents pelo Inspector.
-    // Chame APOS a coleta/abertura/quebra ter sucesso, antes de desativar ou destruir
-    // o objeto. Nao chame apenas porque E/X foi pressionado.
-    public void ConfirmarInteracao()
+    // Podem ser chamados por codigo ou selecionados em um UnityEvent.
+    public void ConfirmarInteracao() { Confirmar(ModoAtivacao.AposInteracaoConcluida); }
+    public void ConfirmarColeta() { Confirmar(ModoAtivacao.AoColetarItem); }
+    public void ConfirmarAberturaBau() { Confirmar(ModoAtivacao.AoAbrirBau); }
+    public void ConfirmarEntradaPorta() { Confirmar(ModoAtivacao.AoEntrarNaPorta); }
+    public void ConfirmarDerrotaInimigo() { Confirmar(ModoAtivacao.AoDerrotarInimigo); }
+    public void ConfirmarQuebraPedra() { Confirmar(ModoAtivacao.AoQuebrarPedra); }
+
+    private void Confirmar(ModoAtivacao acaoRealizada)
     {
-        if (_modoAtivacao != ModoAtivacao.AposInteracaoConcluida) return;
-        if (!ExecutarObjetivo() && !_executado && isActiveAndEnabled)
-            Debug.LogWarning("GatilhoObjetivo: a interacao ocorreu, mas o objetivo nao foi acionado. Confira a Caixa, o ID e se essa missao esta ativa.", this);
+        if (_executado || !isActiveAndEnabled) return;
+        if (_modoAtivacao != acaoRealizada &&
+            _modoAtivacao != ModoAtivacao.AposInteracaoConcluida) return;
+        if (!ExecutarObjetivo())
+            Debug.LogWarning("GatilhoObjetivo: nao registrou a acao. Confira a Caixa ativa e o Id Objetivo: " + _idObjetivo, this);
     }
 
     private bool ExecutarObjetivo()
     {
         if (_executado || !isActiveAndEnabled) return false;
-        if (_caixa == null) _caixa = FindFirstObjectByType<CaixaObjetivos>();
+        if (_caixa == null)
+        {
+            CaixaObjetivos[] caixas = FindObjectsByType<CaixaObjetivos>(FindObjectsSortMode.None);
+            foreach (CaixaObjetivos caixa in caixas)
+            {
+                if (!caixa.isActiveAndEnabled) continue;
+                if (_caixa != null)
+                {
+                    _caixa = null;
+                    return false; // Nunca escolha uma caixa arbitraria.
+                }
+                _caixa = caixa;
+            }
+        }
         if (_caixa == null) return false;
 
         _executado = _acao == Acao.Mostrar
             ? _caixa.TentarMostrarObjetivo(_idObjetivo)
-            : _caixa.TentarConcluirObjetivo(_idObjetivo);
+            : _caixa.TentarAdicionarProgresso(_idObjetivo);
         return _executado;
     }
 }

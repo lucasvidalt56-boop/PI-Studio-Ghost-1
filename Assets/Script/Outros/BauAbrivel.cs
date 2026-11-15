@@ -19,7 +19,7 @@ public class BauAbrivel : MonoBehaviour
 
     private void Update()
     {
-        if (!jogadorPerto || aberto) return;
+        if (!jogadorPerto || aberto || Time.timeScale == 0f) return;
 
         bool apertouE = Keyboard.current != null &&
                         Keyboard.current.eKey.wasPressedThisFrame;
@@ -35,7 +35,7 @@ public class BauAbrivel : MonoBehaviour
     {
         aberto = true;
 
-        animatorBau.SetTrigger("Abrir");
+        if (animatorBau != null) animatorBau.SetTrigger("Abrir");
 
         if (avisoInteracao != null)
         {
@@ -47,7 +47,10 @@ public class BauAbrivel : MonoBehaviour
 
         yield return new WaitForSeconds(tempoAbertura);
 
-        if (pontoSaida == null) yield break;
+        // O bau ja abriu. A missao nao depende de pegar o item que saiu.
+        GetComponent<GatilhoObjetivo>()?.ConfirmarAberturaBau();
+
+        if (pontoSaida == null || itensDentro == null) yield break;
 
         for (int i = 0; i < itensDentro.Length; i++)
         {
