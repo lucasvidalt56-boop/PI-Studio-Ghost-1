@@ -1007,6 +1007,9 @@ MonoBehaviour:
   _inventario: {fileID: 927379577365117841}
   _pocao: {fileID: 11400000, guid: d1284e7a15858d04fbee63d233d4fc54, type: 2}
   _duracao: 30
+  _temporizador: {fileID: 0}
+  _nomeEfeito: Salto Duplo
+  _iconeEfeito: {fileID: 0}
 --- !u!1 &2483577560046598628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,6 +1043,7 @@ RectTransform:
   m_Children:
   - {fileID: 3935749223701345880}
   - {fileID: 7207161924283333750}
+  - {fileID: 877414369677054828}
   m_Father: {fileID: 4983447275584698356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1671,3 +1675,60 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &9142971043132506131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 877414369677054828}
+  - component: {fileID: 1895961783497746710}
+  m_Layer: 5
+  m_Name: Temporizadores
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &877414369677054828
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9142971043132506131}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4938363637108212343}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1895961783497746710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9142971043132506131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a12990be2adc0704f8d74e13fe568d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _caixa: {fileID: 8664184685799384277, guid: b676378faaa52dd4baed2e17d2dfff62, type: 3}
+  _relogio: {fileID: 4989353633438517196, guid: b676378faaa52dd4baed2e17d2dfff62, type: 3}
+  _fundoBarra: {fileID: 6318002109808946699, guid: b676378faaa52dd4baed2e17d2dfff62, type: 3}
+  _fonte: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  _corTexto: {r: 0.95686275, g: 0.9098039, b: 0.7764706, a: 1}
+  _corBarra: {r: 0.23137255, g: 0.7254902, b: 0.38039216, a: 1}
+  _largura: 366
+  _posicao: {x: 24, y: -100}
+  _espacoEntreCaixas: 8

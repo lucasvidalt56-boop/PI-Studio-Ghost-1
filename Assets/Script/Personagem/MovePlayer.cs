@@ -27,7 +27,7 @@ public class Move : MonoBehaviour
 
     [SerializeField] Item _espada;
 
-    [SerializeField] PocaoPuloDuplo _pocaoPuloDuplo;
+    [SerializeField] PuloDuplo _pocaoPuloDuplo;
 
     [SerializeField, Min(0.1f)] float _intensidadePuloDuplo = 1f;
 
