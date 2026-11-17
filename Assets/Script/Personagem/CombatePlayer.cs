@@ -19,6 +19,8 @@ public class CombatePlayer : MonoBehaviour
     [SerializeField] LayerMask _camadaObstaculos;
     [SerializeField] SpriteRenderer _sprite;
     [SerializeField] bool _spriteOriginalOlhaDireita = true;
+    [SerializeField] SonsPersonagem _sons;
+    
 
     [Header("Morte")]
     [SerializeField] UnityEvent _aoMorrer = new UnityEvent();
@@ -96,13 +98,32 @@ public class CombatePlayer : MonoBehaviour
             if (minerar)
             {
                 Minerio minerio = resultado.GetComponentInParent<Minerio>();
-                if (minerio != null && minerio.isActiveAndEnabled && _mineriosAtingidos.Add(minerio))
+
+                if (minerio != null && minerio.isActiveAndEnabled &&
+                    _mineriosAtingidos.Add(minerio))
+                {
                     minerio.ReceberGolpe();
+                }
             }
 
             AtaqueInimigo inimigo = resultado.GetComponentInParent<AtaqueInimigo>();
-            if (inimigo != null && inimigo.isActiveAndEnabled && _atingidas.Add(inimigo))
+
+            if (inimigo != null && inimigo.isActiveAndEnabled &&
+                _atingidas.Add(inimigo))
+            {
                 inimigo.ReceberDano(dano);
+            }
+        }
+
+        if (_sons == null) return;
+
+        if (minerar && _mineriosAtingidos.Count > 0)
+        {
+            _sons.ImpactoPicareta();
+        }
+        else if (!minerar && _atingidas.Count > 0)
+        {
+            _sons.ImpactoEspada();
         }
     }
 

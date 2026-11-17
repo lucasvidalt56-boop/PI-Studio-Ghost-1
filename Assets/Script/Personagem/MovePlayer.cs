@@ -31,6 +31,8 @@ public class Move : MonoBehaviour
 
     [SerializeField, Min(0.1f)] float _intensidadePuloDuplo = 1f;
 
+    [SerializeField] SonsPersonagem _sons;
+
     [Header("Seguranca do ataque")]
     [Tooltip("Deixe maior que a duracao completa do golpe. So libera a trava se o evento final nao acontecer.")]
     [SerializeField, Min(0.1f)] float _tempoMaximoGolpe = 1.2f;
@@ -86,6 +88,11 @@ public class Move : MonoBehaviour
 
         _checkGround = false;
         _rig2d.AddForceY(forca);
+
+        if (_sons != null)
+        {
+            _sons.Pulo();
+        }
     }
 
     public void SelecionarPicareta(bool selecionada)
@@ -151,6 +158,11 @@ public class Move : MonoBehaviour
 
     void OnDisable()
     {
+        if (_sons != null)
+        {
+            _sons.SetCorrendo(false);
+        }
+
         _atacando = false;
         _minerando = false;
         _tempoGolpe = 0f;
@@ -171,9 +183,10 @@ public class Move : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Ground") && _rig2d.linearVelocityY <= 0.01f)
-
-        _checkGround = true;
-        _usouPuloDuplo = false;
+        {
+            _checkGround = true;
+            _usouPuloDuplo = false;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -199,6 +212,18 @@ public class Move : MonoBehaviour
 
     void Update()
     {
+        if (_sons != null)
+        {
+            _sons.SetNoChao(_checkGround);
+
+            _sons.SetCorrendo(
+                _checkGround &&
+                _correndo &&
+                _posicao.x != 0 &&
+                !_minerando &&
+                !_atacando &&
+                Time.timeScale > 0f);
+        }
 
         if (_minerando || _atacando)
         {
@@ -207,11 +232,14 @@ public class Move : MonoBehaviour
 
             if (_tempoGolpe < _tempoMaximoGolpe) return;
 
-            // Protecao: o evento final nao liberou a personagem a tempo.
             if (_atacando) FinalizarAtaque();
             if (_minerando) FinalizarMineracao();
+
             _tempoGolpe = 0f;
-            Debug.LogWarning("Golpe liberado pelo tempo de seguranca. Confira os eventos finais e as transicoes do Animator.", this);
+
+            Debug.LogWarning(
+                "Golpe liberado pelo tempo de seguranca. Confira os eventos finais e as transicoes do Animator.",
+                this);
         }
 
         if (_checkGround)
@@ -220,11 +248,14 @@ public class Move : MonoBehaviour
         }
 
         bool usarCorrida = _checkGround ? _correndo : _correndoNoAr;
-        _rig2d.linearVelocityX = _posicao.x * (usarCorrida ? _velocidadeCorrida : _velocidadeX);
-        _animator.SetBool("Andando", _posicao.x != 0);
-        _animator.SetBool("Correndo", _checkGround && _posicao.x != 0 && usarCorrida);
-        _animator.SetBool("Pulando", !_checkGround);
 
+        _rig2d.linearVelocityX =
+            _posicao.x * (usarCorrida ? _velocidadeCorrida : _velocidadeX);
+
+        _animator.SetBool("Andando", _posicao.x != 0);
+        _animator.SetBool("Correndo",
+            _checkGround && _posicao.x != 0 && usarCorrida);
+        _animator.SetBool("Pulando", !_checkGround);
 
         if (_posicao.x < 0 && _isface == false)
         {
@@ -234,7 +265,6 @@ public class Move : MonoBehaviour
         {
             Flip();
         }
-
     }
 
 }
