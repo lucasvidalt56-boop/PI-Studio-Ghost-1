@@ -168,6 +168,23 @@ public class Inventario : MonoBehaviour
         return true;
     }
 
+    public void TrocarSlot(InputAction.CallbackContext contexto)
+    {
+        if (!contexto.performed || _slots == null || _slots.Length == 0) return;
+        if (!(contexto.control.device is Gamepad controle)) return;
+
+        int direcao;
+        if (contexto.control == controle.dpad.left)
+            direcao = -1;
+        else if (contexto.control == controle.dpad.right)
+            direcao = 1;
+        else
+            return;
+
+        int indice = (_slotSelecionado + direcao + _slots.Length) % _slots.Length;
+        SetSelecionado(indice);
+    }
+
     void Update()
     {
         if (_slots == null) return;

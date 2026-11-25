@@ -163,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 926451398013019886}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.64, y: -3.135642, z: 0}
+  m_LocalPosition: {x: 12.64, y: -3.142642, z: 0}
   m_LocalScale: {x: 1.16, y: 1.06, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1088,6 +1088,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 76649658-1c1f-42de-8338-03c942e88282
     m_ActionName: 'Player/Minerar[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5474422437421341423}
+        m_TargetAssemblyTypeName: Move, Assembly-CSharp
+        m_MethodName: SetMinerar
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8f96b5ea-4dfd-4edc-af1c-a673a2d0e3ef
+    m_ActionName: 'Player/Atacar[/XInputControllerWindows/rightTrigger]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 927379577365117841}
+        m_TargetAssemblyTypeName: Inventario, Assembly-CSharp
+        m_MethodName: TrocarSlot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 414e80be-d404-4a44-a68a-26156cecfee1
+    m_ActionName: 'Player/Inventario[/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1630,7 +1662,7 @@ MonoBehaviour:
   _layoutSelecionado: {fileID: 4293238664027826256, guid: 6fa7cbb514796ff4dae00fe6ea28dbdd, type: 3}
   _catalogoItens:
   - {fileID: 11400000, guid: ee71ed37e4849f947bc35bf8d6cfe68d, type: 2}
-  - {fileID: 11400000, guid: 3e61c8c96a2153c4db6019bd4c718b95, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 8e8929d314ccc3942b57485236319205, type: 2}
 --- !u!114 &3037853350004695725
 MonoBehaviour:

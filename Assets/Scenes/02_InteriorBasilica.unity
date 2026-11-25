@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &80047331 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7180642197939716261, guid: abebe219c6bf9b04c8a59858b935c069, type: 3}
+  m_PrefabInstance: {fileID: 671865649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &184215977
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,10 +703,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: AvisoInteracao
       objectReference: {fileID: 0}
+    - target: {fileID: 7423577578077677506, guid: abebe219c6bf9b04c8a59858b935c069, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3882661685753872335, guid: abebe219c6bf9b04c8a59858b935c069, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: abebe219c6bf9b04c8a59858b935c069, type: 3}
 --- !u!1 &788850984
 GameObject:
@@ -1152,6 +1164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cenaDestino: 03_Cripta
+  _tempoMostrarObjetivo: 0.8
 --- !u!61 &980925500
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1227,7 +1240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aviso: {fileID: 1453580979}
   botaoX: {fileID: 1940434615}
-  teclaE: {fileID: 0}
+  teclaE: {fileID: 80047331}
   texto: {fileID: 2105510289}
   mensagem: ENTRAR
   velocidadePulso: 2
@@ -1637,6 +1650,10 @@ MonoBehaviour:
   _camadaLimite:
     serializedVersion: 2
     m_Bits: 1024
+  _ativarPatrulha: 0
+  _raioPatrulha: 2
+  _velocidadePatrulha: 1
+  _pausaPatrulha: 1
   _sprite: {fileID: 0}
   _spriteOriginalOlhaDireita: 0
 --- !u!1 &1143810143
@@ -1910,7 +1927,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 3.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
