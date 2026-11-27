@@ -156,6 +156,21 @@ public class Move : MonoBehaviour
         _animator.SetBool("Atacando", false);
     }
 
+    public void ReiniciarAcoes()
+    {
+        _atacando = false;
+        _minerando = false;
+        _tempoGolpe = 0f;
+        _checkGround = false;
+        _usouPuloDuplo = false;
+        _correndoNoAr = false;
+        if (_animator != null)
+        {
+            _animator.Rebind();
+            _animator.Update(0f);
+        }
+    }
+
     void OnDisable()
     {
         if (_sons != null)

@@ -317,6 +317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 468076029}
   - component: {fileID: 468076030}
+  - component: {fileID: 781900003}
   m_Layer: 0
   m_Name: ChegadaIgreja
   m_TagString: Untagged
@@ -715,6 +716,19 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: abebe219c6bf9b04c8a59858b935c069, type: 3}
+--- !u!114 &781900003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468076028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47cdd5ac646f48b0959081946c30ea5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vidaAoRenascer: 100
 --- !u!1 &788850984
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,6 +998,51 @@ MonoBehaviour:
   - {x: -0.30871964, y: 0.73944336, z: 0}
   - {x: -0.42744064, y: 0.55400807, z: 0}
   - {x: -0.7078328, y: 0.14647526, z: 0}
+--- !u!1 &919883137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 919883139}
+  - component: {fileID: 919883138}
+  m_Layer: 0
+  m_Name: PontoRenascimento
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &919883138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919883137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47cdd5ac646f48b0959081946c30ea5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vidaAoRenascer: 100
+--- !u!4 &919883139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919883137}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.51, y: -2.074, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &934575165
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,10 +1978,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.08177084
+    y: -0.023148147
+    width: 0.33333334
+    height: 0.3333333
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -3401,3 +3460,4 @@ SceneRoots:
   - {fileID: 671865649}
   - {fileID: 1132764792}
   - {fileID: 371577087}
+  - {fileID: 919883139}

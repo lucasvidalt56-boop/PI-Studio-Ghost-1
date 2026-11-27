@@ -148,6 +148,20 @@ public class CombatePlayer : MonoBehaviour
         _morto = true;
         _golpeDisponivel = false;
 
+        var ponto = PontoRenascimento.Buscar(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
+        if (ponto != null)
+        {
+            _aoMorrer.Invoke();
+            _rig2d.linearVelocity = Vector2.zero;
+            _rig2d.angularVelocity = 0f;
+            transform.position = ponto.transform.position;
+            _rig2d.position = ponto.transform.position;
+            if (TryGetComponent(out Move controle)) controle.ReiniciarAcoes();
+            _vida.Curar(ponto.VidaAoRenascer);
+            _morto = false;
+            return;
+        }
+
         if (TryGetComponent(out PlayerInput entrada)) entrada.enabled = false;
         if (TryGetComponent(out Move movimento)) movimento.enabled = false;
         if (TryGetComponent(out ColetarPlayer coleta)) coleta.enabled = false;
@@ -157,6 +171,12 @@ public class CombatePlayer : MonoBehaviour
         _rig2d.angularVelocity = 0f;
         _rig2d.constraints |= RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         _aoMorrer.Invoke();
+    }
+
+    [ContextMenu("Testar morte (Play Mode)")]
+    void TestarMorte()
+    {
+        if (Application.isPlaying) ReceberDano(VidaPlayer.VidaMaxima);
     }
 
     void OnDrawGizmosSelected()

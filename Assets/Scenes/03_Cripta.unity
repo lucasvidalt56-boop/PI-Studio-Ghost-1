@@ -673,6 +673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 468076029}
   - component: {fileID: 468076030}
+  - component: {fileID: 781900003}
   m_Layer: 0
   m_Name: Chegada
   m_TagString: Untagged
@@ -695,6 +696,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &781900003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468076028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47cdd5ac646f48b0959081946c30ea5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vidaAoRenascer: 100
 --- !u!114 &468076030
 MonoBehaviour:
   m_ObjectHideFlags: 0
